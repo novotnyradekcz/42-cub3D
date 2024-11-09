@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:27:40 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:44:03 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	rotate_player(t_game *data, double rotdir)
 	double	rotspeed;
 
 	moved = 0;
-	rotspeed = ROTSPEED * rotdir;
+	rotspeed = ROT_SPEED * rotdir;
 	moved += rotate_left_right(data, rotspeed);
 	return (moved);
 }

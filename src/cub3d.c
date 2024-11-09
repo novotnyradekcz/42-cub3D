@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 13:36:12 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:08:51 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,16 +118,18 @@ static int	parse_args(t_game *data, char **av)
 	data->map[3] = strdup("1000000001");
 	data->map[4] = strdup("1111111111");
 	data->map[5] = NULL;
-	data->texinfo.ceiling = malloc(sizeof(int) * 3);
-	data->texinfo.floor = malloc(sizeof(int) * 3);
-	data->texinfo.ceiling[0] = 100;
-	data->texinfo.floor[0] = 200;
-	data->texinfo.ceiling[1] = 0;
-	data->texinfo.floor[1] = 0;
-	data->texinfo.ceiling[2] = 200;
-	data->texinfo.floor[2] = 100;
+	// data->texinfo.ceiling = malloc(sizeof(int) * 3);
+	// data->texinfo.floor = malloc(sizeof(int) * 3);
+	// data->texinfo.ceiling[0] = 100;
+	// data->texinfo.floor[0] = 200;
+	// data->texinfo.ceiling[1] = 0;
+	// data->texinfo.floor[1] = 0;
+	// data->texinfo.ceiling[2] = 200;
+	// data->texinfo.floor[2] = 100;
+	data->texinfo.hex_ceiling = 0xBADBED;
+	data->texinfo.hex_floor = 0xFFA490;
 	data->player.pos_x = 4;
-	data->player.pos_y = 3;
+	data->player.pos_y = 3.5;
 	data->player.dir = 'N';
 	
 	init_player_direction(data);
@@ -151,7 +153,7 @@ int	main(int argc, char **argv)
 		// 	return (1);
 		// }
 		// parse_map(&game);
-		init_data(&data);
+		init_game(&data);
 		if (parse_args(&data, argv) != 0)
 			return (1);
 		init_mlx(&data);

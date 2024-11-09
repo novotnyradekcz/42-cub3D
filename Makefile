@@ -6,7 +6,7 @@
 #    By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 11:44:56 by rnovotny          #+#    #+#              #
-#    Updated: 2024/11/09 13:06:28 by rnovotny         ###   ########.fr        #
+#    Updated: 2024/11/09 14:32:05 by rnovotny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC =	src/cub3d.c \
 		src/rendering.c \
 		src/rotate.c \
 		src/texturing.c \
-		src/init/data.c \
+		src/init/game.c \
 		src/init/mlx.c \
 		src/init/player.c \
 		src/init/textures.c \
@@ -74,7 +74,9 @@ $(NAME): $(OBJ)
 	@if [ ! -d "$(MLX_LIB)" ]; then \
 	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_LIB); \
 	fi
-	@make -C $(MLX_LIB)
+	@if [ ! -f "$(MLX_LIB)/libmlx.a" ]; then \
+	make -C $(MLX_LIB); \
+	fi
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:

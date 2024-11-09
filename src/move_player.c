@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:24:48 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:43:25 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	move_player_forward(t_game *data)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->player.pos_x + data->player.dir_x * MOVESPEED;
-	new_y = data->player.pos_y + data->player.dir_y * MOVESPEED;
-	return (validate_move(data, new_x, new_y));
+	new_x = data->player.pos_x + data->player.dir_x * MOVE_SPEED;
+	new_y = data->player.pos_y + data->player.dir_y * MOVE_SPEED;
+	return (check_move(data, new_x, new_y));
 }
 
 static int	move_player_backward(t_game *data)
@@ -27,9 +27,9 @@ static int	move_player_backward(t_game *data)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->player.pos_x - data->player.dir_x * MOVESPEED;
-	new_y = data->player.pos_y - data->player.dir_y * MOVESPEED;
-	return (validate_move(data, new_x, new_y));
+	new_x = data->player.pos_x - data->player.dir_x * MOVE_SPEED;
+	new_y = data->player.pos_y - data->player.dir_y * MOVE_SPEED;
+	return (check_move(data, new_x, new_y));
 }
 
 static int	move_player_left(t_game *data)
@@ -37,9 +37,9 @@ static int	move_player_left(t_game *data)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->player.pos_x + data->player.dir_y * MOVESPEED;
-	new_y = data->player.pos_y - data->player.dir_x * MOVESPEED;
-	return (validate_move(data, new_x, new_y));
+	new_x = data->player.pos_x + data->player.dir_y * MOVE_SPEED;
+	new_y = data->player.pos_y - data->player.dir_x * MOVE_SPEED;
+	return (check_move(data, new_x, new_y));
 }
 
 static int	move_player_right(t_game *data)
@@ -47,9 +47,9 @@ static int	move_player_right(t_game *data)
 	double	new_x;
 	double	new_y;
 
-	new_x = data->player.pos_x - data->player.dir_y * MOVESPEED;
-	new_y = data->player.pos_y + data->player.dir_x * MOVESPEED;
-	return (validate_move(data, new_x, new_y));
+	new_x = data->player.pos_x - data->player.dir_y * MOVE_SPEED;
+	new_y = data->player.pos_y + data->player.dir_x * MOVE_SPEED;
+	return (check_move(data, new_x, new_y));
 }
 
 int	move_player(t_game *data)

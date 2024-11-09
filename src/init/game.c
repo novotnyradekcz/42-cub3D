@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:18:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:58:41 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,17 +68,17 @@ static void	init_player(t_player *player)
 	player->rotate = 0;
 }
 
-void	init_data(t_game *data)
+void	init_game(t_game *game)
 {
-	data->mlx = NULL;
-	data->win = NULL;
-	data->win_height = WIN_HEIGHT;
-	data->win_width = WIN_WIDTH;
-	init_player(&data->player);
-	init_texinfo(&data->texinfo);
-	data->map = NULL;
-	init_mapinfo(&data->mapinfo);
-	init_img_clean(&data->minimap);
-	data->texture_pixels = NULL;
-	data->textures = NULL;
+	game->mlx = NULL;
+	game->win = NULL;
+	game->win_height = WIN_HEIGHT;
+	game->win_width = WIN_WIDTH;
+	init_player(&game->player);
+	init_texinfo(&game->texinfo);
+	game->map = NULL;
+	init_mapinfo(&game->mapinfo);
+	init_img_clean(&game->minimap);
+	game->texture_pixels = NULL;
+	game->textures = NULL;
 }

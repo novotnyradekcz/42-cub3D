@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:54:48 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 15:44:13 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@
 
 # define TEX_SIZE 64
 
-# define MOVESPEED 0.0125
-# define ROTSPEED 0.015
+# define COLLISION_DIST 0.04
+
+# define MOVE_SPEED 0.0125
+# define ROT_SPEED 0.015
 
 # define MMAP_PIXEL_SIZE 128
 # define MMAP_VIEW_DIST 4
@@ -40,8 +42,6 @@
 # define MMAP_COLOR_WALL 0x808080
 # define MMAP_COLOR_FLOOR 0xE6E6E6
 # define MMAP_COLOR_SPACE 0x404040
-
-# define DIST_EDGE_MOUSE_WRAP 20
 
 enum e_output
 {
@@ -71,10 +71,10 @@ typedef struct s_img
 
 typedef struct s_texinfo
 {
-	char			*north;
-	char			*south;
-	char			*west;
-	char			*east;
+	char			*north; // merge this
+	char			*south; // into
+	char			*west; // one
+	char			*east; // **char
 	int				*floor;
 	int				*ceiling;
 	unsigned long	hex_floor;
@@ -162,7 +162,7 @@ typedef struct s_game
 }	t_game;
 
 // init/data.c
-void	init_data(t_game *data);
+void	init_game(t_game *data);
 void	init_img_clean(t_img *img);
 void	init_ray(t_ray *ray);
 
@@ -200,7 +200,7 @@ void	render_minimap_image(t_game *data, t_minimap *minimap);
 void	listen_for_input(t_game *data);
 
 // check_move.c
-int		validate_move(t_game *data, double new_x, double new_y);
+int		check_move(t_game *data, double new_x, double new_y);
 
 // move_player.c
 int		move_player(t_game *data);
