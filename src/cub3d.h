@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:38:11 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 10:33:09 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,10 +185,12 @@ int		quit_cub3d(t_data *data);
 void	free_tab(void **tab);
 int		free_data(t_data *data);
 
-/* error.c */
+// error.c
 int		err_msg(char *detail, char *str, int code);
 int		err_msg_val(int detail, char *str, int code);
 
+// gnl/get_next_line.c
+char	*get_next_line(int fd);
 
 // TODO: just for testing, remove later
 /* parsing/check_args.c */

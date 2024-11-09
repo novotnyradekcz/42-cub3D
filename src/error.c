@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:39:42 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:39:48 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 10:01:34 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,31 @@
 
 int	err_msg(char *detail, char *str, int code)
 {
-	ft_putstr_fd(RED "cub3D: Error", 2);
+	write(2, "cub3D: Error", 12);
 	if (detail)
 	{
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(detail, 2);
+		write(2, ": ", 2);
+		write(2, detail, ft_strlen(detail));
 	}
 	if (str)
 	{
-		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(str, 2);
+		write(2, ": ", 2);
+		write(2, str, ft_strlen(str));
 	}
-	ft_putstr_fd("\n" RESET, 2);
+	write(2, "\n", 1);
 	return (code);
 }
 
 int	err_msg_val(int detail, char *str, int code)
 {
-	ft_putstr_fd(RED "cub3D: Error: ", 2);
-	ft_putnbr_fd(detail, 2);
-	ft_putstr_fd(": ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd("\n" RESET, 2);
+	char	*tmp;
+	
+	write(2, "cub3D: Error", 12);
+	tmp = ft_itoa(detail);
+	write(2, tmp, ft_strlen(tmp));
+	free(tmp);
+	write(2, ": ", 2);
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 1);
 	return (code);
 }

@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:05:41 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 08:44:06 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,23 @@ void	init_game(t_game *game)
 	// game->player.rotate = 0;
 }
 
+static int	parse_args(t_data *data, char **av)
+{
+	if (check_file(av[1], true) == FAILURE)
+		clean_exit(data, FAILURE);
+	parse_data(av[1], data);
+	if (get_file_data(data, data->mapinfo.file) == FAILURE)
+		return (free_data(data));
+	if (check_map_validity(data, data->map) == FAILURE)
+		return (free_data(data));
+	if (check_textures_validity(data, &data->texinfo) == FAILURE)
+		return (free_data(data));
+	init_player_direction(data);
+	if (DEBUG_MSG)
+		debug_display_data(data);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	if (argv[1] && argc == 2)
@@ -114,6 +131,8 @@ int	main(int argc, char **argv)
 		// }
 		// parse_map(&game);
 		init_data(&data);
+		if (parse_args(&data, argv) != 0)
+			return (1);
 		init_mlx(&data);
 		init_textures(&data);
 		print_controls();
