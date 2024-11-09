@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:32:23 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:34:17 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static void	draw_minimap(t_minimap *minimap)
 	set_minimap_border_image_pixels(minimap, MMAP_COLOR_SPACE);
 }
 
-void	render_minimap_image(t_data *data, t_minimap *minimap)
+void	render_minimap_image(t_game *data, t_minimap *minimap)
 {
 	int	img_size;
 

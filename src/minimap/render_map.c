@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:33:02 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:34:21 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:50:53 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ static int	get_mmap_offset(t_minimap *minimap, int mapsize, int pos)
 	return (0);
 }
 
-static bool	is_valid_map_coord(int coord, int size)
+static int	is_valid_map_coord(int coord, int size)
 {
 	if (coord < size)
-		return (true);
-	return (false);
+		return (1);
+	return (0);
 }
 
-static char	*add_minimap_line(t_data *d, t_minimap *m, int y)
+static char	*add_minimap_line(t_game *d, t_minimap *m, int y)
 {
 	char	*line;
 	int		x;
@@ -56,7 +56,7 @@ static char	*add_minimap_line(t_data *d, t_minimap *m, int y)
 	return (line);
 }
 
-static char	**generate_minimap(t_data *data, t_minimap *minimap)
+static char	**generate_minimap(t_game *data, t_minimap *minimap)
 {
 	char	**mmap;
 	int		y;
@@ -78,7 +78,7 @@ static char	**generate_minimap(t_data *data, t_minimap *minimap)
 	return (mmap);
 }
 
-void	render_minimap(t_data *data)
+void	render_minimap(t_game *data)
 {
 	t_minimap	minimap;
 
@@ -94,11 +94,9 @@ void	render_minimap(t_data *data)
 	minimap.map = generate_minimap(data, &minimap);
 	if (!minimap.map)
 	{
-		err_msg(NULL, ERR_MALLOC, 0);
+		err_msg(NULL, "malloc error", 0);
 		return ;
 	}
-	if (MMAP_DEBUG_MSG)
-		debug_display_minimap(&minimap);
 	render_minimap_image(data, &minimap);
 	free_tab((void **)minimap.map);
 }

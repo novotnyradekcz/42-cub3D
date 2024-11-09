@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:34:36 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:34:38 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:32:32 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static void	set_dda(t_ray *ray, t_player *player)
 - If the sidedistx < sidedisty, x is the closest point from the ray
 */
 
-static void	perform_dda(t_data *data, t_ray *ray)
+static void	perform_dda(t_game *data, t_ray *ray)
 {
 	int	hit;
 
@@ -100,7 +100,7 @@ static void	perform_dda(t_data *data, t_ray *ray)
 	}
 }
 
-static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
+static void	calculate_line_height(t_ray *ray, t_game *data, t_player *player)
 {
 	if (ray->side == 0)
 		ray->wall_dist = (ray->sidedist_x - ray->deltadist_x);
@@ -120,7 +120,7 @@ static void	calculate_line_height(t_ray *ray, t_data *data, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-int	raycasting(t_player *player, t_data *data)
+int	raycasting(t_player *player, t_game *data)
 {
 	t_ray	ray;
 	int		x;

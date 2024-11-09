@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnovotny <rnovotny@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:28:35 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/04/30 15:24:42 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:42:07 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*output_line(char *mystr)
 	char	*outputline;
 
 	i = 0;
-	outputline = (char *)malloc((ft_strlen(mystr, '\n') + 2) * sizeof(char));
+	outputline = (char *)malloc((ft_strlen_end(mystr, '\n') + 2) * sizeof(char));
 	if (!outputline)
 		return (0);
 	while (mystr[i] != '\n' && mystr[i] != '\0')

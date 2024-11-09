@@ -6,7 +6,7 @@
 #    By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 11:44:56 by rnovotny          #+#    #+#              #
-#    Updated: 2024/11/09 10:47:07 by rnovotny         ###   ########.fr        #
+#    Updated: 2024/11/09 13:06:28 by rnovotny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,13 @@ SRC =	src/cub3d.c \
 		src/error.c \
 		src/free.c \
 		src/handle_input.c \
-		src/init.c \
 		src/move_player.c \
 		src/parse.c \
 		src/quit.c \
 		src/raycasting.c \
 		src/rendering.c \
 		src/rotate.c \
-		src/testuring.c \
+		src/texturing.c \
 		src/init/data.c \
 		src/init/mlx.c \
 		src/init/player.c \
@@ -46,10 +45,21 @@ SRC =	src/cub3d.c \
 		src/parsing/parsing_utils.c \
 		src/gnl/get_next_line.c \
 		src/gnl/get_next_line_utils.c \
+		src/libft/ft_atoi.c \
+		src/libft/ft_bzero.c \
+		src/libft/ft_calloc.c \
+		src/libft/ft_isdigit.c \
+		src/libft/ft_isprint.c \
 		src/libft/ft_itoa.c \
+		src/libft/ft_split.c \
+		src/libft/ft_strchr.c \
+		src/libft/ft_strdup.c \
 		src/libft/ft_strlen.c
 
 OBJ = $(SRC:.c=.o)
+
+INC =	-I/usr/X11/include \
+		-Imlx
 
 MLX_LIB = mlx/
 
@@ -65,7 +75,7 @@ $(NAME): $(OBJ)
 	git clone https://github.com/42Paris/minilibx-linux.git $(MLX_LIB); \
 	fi
 	@make -C $(MLX_LIB)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean:
 	@if [ -d "mlx" ]; then \

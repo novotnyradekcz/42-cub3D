@@ -1,35 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 08:10:32 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
+/*   Created: 2023/01/09 13:48:02 by rnovotny          #+#    #+#             */
+/*   Updated: 2023/01/18 22:59:42 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	clean_exit(t_game *data, int code)
+void	ft_bzero(void *s, size_t n)
 {
-	if (!data)
-		exit(code);
-	if (data->win && data->mlx)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
+	size_t	i;
+	char	*ps;
+
+	ps = (char *)s;
+	i = 0;
+	while (i < n)
 	{
-		mlx_destroy_display(data->mlx);
-		mlx_loop_end(data->mlx);
-		free(data->mlx);
+		ps[i] = 0;
+		i++;
 	}
-	free_data(data);
-	exit(code);
-}
-
-int	quit_cub3d(t_game *data)
-{
-	clean_exit(data, 0);
-	return (0);
 }

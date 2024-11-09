@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:31:47 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/11 11:27:46 by mcombeau         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:52:00 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int	is_a_white_space(char c)
 {

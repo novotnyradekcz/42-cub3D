@@ -6,13 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:27:40 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:27:51 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	rotate_left_right(t_data *data, double rotspeed)
+static int	rotate_left_right(t_game *data, double rotspeed)
 {
 	t_player	*p;
 	double		tmp_x;
@@ -27,7 +27,7 @@ static int	rotate_left_right(t_data *data, double rotspeed)
 	return (1);
 }
 
-int	rotate_player(t_data *data, double rotdir)
+int	rotate_player(t_game *data, double rotdir)
 {
 	int		moved;
 	double	rotspeed;

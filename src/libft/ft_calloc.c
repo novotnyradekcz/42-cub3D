@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 08:10:32 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
+/*   Created: 2023/01/10 12:24:24 by rnovotny          #+#    #+#             */
+/*   Updated: 2023/01/22 20:11:37 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	clean_exit(t_game *data, int code)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
-	if (!data)
-		exit(code);
-	if (data->win && data->mlx)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		mlx_loop_end(data->mlx);
-		free(data->mlx);
-	}
-	free_data(data);
-	exit(code);
-}
+	void	*result;
 
-int	quit_cub3d(t_game *data)
-{
-	clean_exit(data, 0);
-	return (0);
+	result = malloc(nmemb * size);
+	if (result == 0)
+		return (0);
+	ft_bzero(result, nmemb * size);
+	return (result);
 }

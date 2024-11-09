@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:44:06 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:36:12 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	print_controls(void)
 	printf("\trotate left:\tleft arrow\n");
 	printf("\trotate right:\tright arrow\n\n");
 }
-
+/*
 int	check_extension(char *argv)
 {
 	int	i;
@@ -81,7 +81,7 @@ int	check_arg(char *argv)
 	return (0);
 }
 
-void	init_game(t_game *game)
+void	init_game(t_game  *game)
 {
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, game->win_width, game->win_height, "cub3D");
@@ -97,21 +97,42 @@ void	init_game(t_game *game)
 	// game->player.move_y = 0;
 	// game->player.rotate = 0;
 }
-
-static int	parse_args(t_data *data, char **av)
+*/
+static int	parse_args(t_game *data, char **av)
 {
-	if (check_file(av[1], true) == FAILURE)
+	if (check_file(av[1], 1) == FAILURE)
 		clean_exit(data, FAILURE);
-	parse_data(av[1], data);
-	if (get_file_data(data, data->mapinfo.file) == FAILURE)
-		return (free_data(data));
-	if (check_map_validity(data, data->map) == FAILURE)
-		return (free_data(data));
-	if (check_textures_validity(data, &data->texinfo) == FAILURE)
-		return (free_data(data));
+	// parse_data(av[1], data);
+	// if (get_file_data(data, data->mapinfo.file) == FAILURE)
+	// 	return (free_data(data));
+	// if (check_map_validity(data, data->map) == FAILURE)
+	// 	return (free_data(data));
+	// if (check_textures_validity(data, &data->texinfo) == FAILURE)
+	// 	return (free_data(data));
+	data->mapinfo.width = 10;
+	data->mapinfo.height = 5;
+	data->map = malloc(sizeof(char *) * (data->mapinfo.height + 1));
+	data->map[0] = strdup("1111111111");
+	data->map[1] = strdup("1000000001");
+	data->map[2] = strdup("1001111001");
+	data->map[3] = strdup("1000000001");
+	data->map[4] = strdup("1111111111");
+	data->map[5] = NULL;
+	data->texinfo.ceiling = malloc(sizeof(int) * 3);
+	data->texinfo.floor = malloc(sizeof(int) * 3);
+	data->texinfo.ceiling[0] = 100;
+	data->texinfo.floor[0] = 200;
+	data->texinfo.ceiling[1] = 0;
+	data->texinfo.floor[1] = 0;
+	data->texinfo.ceiling[2] = 200;
+	data->texinfo.floor[2] = 100;
+	data->player.pos_x = 4;
+	data->player.pos_y = 3;
+	data->player.dir = 'N';
+	
 	init_player_direction(data);
-	if (DEBUG_MSG)
-		debug_display_data(data);
+	// if (DEBUG_MSG)
+	// 	debug_display_data(data);
 	return (0);
 }
 
@@ -119,7 +140,7 @@ int	main(int argc, char **argv)
 {
 	if (argv[1] && argc == 2)
 	{
-		t_data	data;
+		t_game	data;
 
 		// if (check_arg(argv[1]) == 0)
 		// 	return (1);

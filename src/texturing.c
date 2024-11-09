@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:37:21 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:38:14 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:47:14 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	set_image_pixel(t_img *image, int x, int y, int color)
 	image->addr[pixel] = color;
 }
 
-void	init_texture_pixels(t_data *data)
+void	init_texture_pixels(t_game *data)
 {
 	int	i;
 
@@ -29,19 +29,19 @@ void	init_texture_pixels(t_data *data)
 	data->texture_pixels = ft_calloc(data->win_height + 1,
 			sizeof * data->texture_pixels);
 	if (!data->texture_pixels)
-		clean_exit(data, err_msg(NULL, ERR_MALLOC, 1));
+		clean_exit(data, err_msg(NULL, "malloc error", 1));
 	i = 0;
 	while (i < data->win_height)
 	{
 		data->texture_pixels[i] = ft_calloc(data->win_width + 1,
 				sizeof * data->texture_pixels);
 		if (!data->texture_pixels[i])
-			clean_exit(data, err_msg(NULL, ERR_MALLOC, 1));
+			clean_exit(data, err_msg(NULL, "malloc error", 1));
 		i++;
 	}
 }
 
-static void	get_texture_index(t_data *data, t_ray *ray)
+static void	get_texture_index(t_game *data, t_ray *ray)
 {
 	if (ray->side == 0)
 	{
@@ -59,7 +59,7 @@ static void	get_texture_index(t_data *data, t_ray *ray)
 	}
 }
 
-void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x)
+void	update_texture_pixels(t_game *data, t_texinfo *tex, t_ray *ray, int x)
 {
 	int			y;
 	int			color;

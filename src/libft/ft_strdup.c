@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 08:10:32 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
+/*   Created: 2023/01/10 12:25:24 by rnovotny          #+#    #+#             */
+/*   Updated: 2024/10/18 18:49:52 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	clean_exit(t_game *data, int code)
+char	*ft_strdup(const char *str)
 {
-	if (!data)
-		exit(code);
-	if (data->win && data->mlx)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
+	int		i;
+	char	*strdup;
+
+	if (!str)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	strdup = (char *) malloc((i + 1) * sizeof(char));
+	if (strdup == 0)
+		return (0);
+	while (i >= 0)
 	{
-		mlx_destroy_display(data->mlx);
-		mlx_loop_end(data->mlx);
-		free(data->mlx);
+		strdup[i] = str[i];
+		i--;
 	}
-	free_data(data);
-	exit(code);
-}
-
-int	quit_cub3d(t_game *data)
-{
-	clean_exit(data, 0);
-	return (0);
+	return (strdup);
 }

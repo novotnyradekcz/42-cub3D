@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:22:51 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:25:00 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	init_player_east_west(t_player *player)
 		return ;
 }
 
-void	init_player_direction(t_data *data)
+void	init_player_direction(t_game *data)
 {
 	init_player_north_south(&data->player);
 	init_player_east_west(&data->player);

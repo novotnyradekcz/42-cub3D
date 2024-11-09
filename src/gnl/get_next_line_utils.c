@@ -6,13 +6,13 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:29:11 by rnovotny          #+#    #+#             */
-/*   Updated: 2023/03/07 19:14:41 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 13:00:54 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *str, char end)
+size_t	ft_strlen_end(const char *str, char end)
 {
 	int	n;
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(const char *str, char end)
 	return (n);
 }
 
-int	ft_strchr(const char *s, int c)
+int	ft_strchr_find(const char *s, int c)
 {
 	int		i;
 
@@ -40,15 +40,15 @@ int	ft_strchr(const char *s, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin_gnl(char *s1, char *s2)
 {
 	int		len1;
 	int		len2;
 	int		i;
 	char	*joined;
 
-	len1 = ft_strlen(s1, '\0');
-	len2 = ft_strlen(s2, '\0');
+	len1 = ft_strlen_end(s1, '\0');
+	len2 = ft_strlen_end(s2, '\0');
 	i = 0;
 	joined = (char *)malloc((len1 + len2 + 1) * sizeof(char));
 	if (!joined)
@@ -75,13 +75,13 @@ char	*move_on(char *str)
 	int		i;
 	int		len;
 
-	len = ft_strlen(str, '\n');
-	if (len == (int)ft_strlen(str, '\0'))
+	len = ft_strlen_end(str, '\n');
+	if (len == (int)ft_strlen_end(str, '\0'))
 	{
 		free(str);
 		return (0);
 	}
-	new = (char *)malloc((ft_strlen(str, '\0') - len) * sizeof(char));
+	new = (char *)malloc((ft_strlen_end(str, '\0') - len) * sizeof(char));
 	if (!new)
 	{
 		free(str);
@@ -106,7 +106,7 @@ char	*read_to_string(int fd, char *str)
 	buffer = (char *)malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (0);
-	if (ft_strchr(str, '\n'))
+	if (ft_strchr_find(str, '\n'))
 		check = 0;
 	else
 		check = BUFFER_SIZE;
@@ -119,9 +119,9 @@ char	*read_to_string(int fd, char *str)
 			return (0);
 		}
 		buffer[check] = '\0';
-		if (ft_strchr(buffer, '\n'))
+		if (ft_strchr_find(buffer, '\n'))
 			check = 0;
-		str = ft_strjoin(str, buffer);
+		str = ft_strjoin_gnl(str, buffer);
 	}
 	free(buffer);
 	return (str);

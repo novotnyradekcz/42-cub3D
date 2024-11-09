@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   fill_color_textures.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:38:18 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/09 22:38:19 by alexa            ###   ########.fr       */
+/*   Updated: 2024/11/09 12:58:55 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-static bool	no_digit(char *str)
+static int	no_digit(char *str)
 {
-	int		i;
-	bool	found_no_digit;
+	int	i;
+	int	found_no_digit;
 
 	i = 0;
-	found_no_digit = true;
+	found_no_digit = 1;
 	while (str[i])
 	{
 		if (ft_isdigit(str[i]) == 1)
-			found_no_digit = false;
+			found_no_digit = 0;
 		i++;
 	}
 	return (found_no_digit);
@@ -36,7 +36,7 @@ static int	*copy_into_rgb_array(char **rgb_to_convert, int *rgb)
 	while (rgb_to_convert[++i])
 	{
 		rgb[i] = ft_atoi(rgb_to_convert[i]);
-		if (rgb[i] == -1 || no_digit(rgb_to_convert[i]) == true)
+		if (rgb[i] == -1 || no_digit(rgb_to_convert[i]) == 1)
 		{
 			free_tab((void **)rgb_to_convert);
 			free(rgb);
@@ -65,29 +65,29 @@ static int	*set_rgb_colors(char *line)
 	rgb = malloc(sizeof(int) * 3);
 	if (!rgb)
 	{
-		err_msg(NULL, ERR_MALLOC, 0);
+		err_msg(NULL, "malloc error", 0);
 		return (0);
 	}
 	return (copy_into_rgb_array(rgb_to_convert, rgb));
 }
 
-int	fill_color_textures(t_data *data, t_texinfo *textures, char *line, int j)
+int	fill_color_textures(t_game *data, t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 1] && ft_isprint(line[j + 1]))
-		return (err_msg(data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
+		return (err_msg(data->mapinfo.path, "wrong floor/ceiling color", ERR));
 	if (!textures->ceiling && line[j] == 'C')
 	{
 		textures->ceiling = set_rgb_colors(line + j + 1);
 		if (textures->ceiling == 0)
-			return (err_msg(data->mapinfo.path, ERR_COLOR_CEILING, ERR));
+			return (err_msg(data->mapinfo.path, "wrong ceiling color", ERR));
 	}
 	else if (!textures->floor && line[j] == 'F')
 	{
 		textures->floor = set_rgb_colors(line + j + 1);
 		if (textures->floor == 0)
-			return (err_msg(data->mapinfo.path, ERR_COLOR_FLOOR, ERR));
+			return (err_msg(data->mapinfo.path, "wrong floor color", ERR));
 	}
 	else
-		return (err_msg(data->mapinfo.path, ERR_FLOOR_CEILING, ERR));
+		return (err_msg(data->mapinfo.path, "wrong floor/ceiling color", ERR));
 	return (SUCCESS);
 }

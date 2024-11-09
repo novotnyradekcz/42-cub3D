@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/02 11:14:06 by rnovotny         ###   ########.fr       */
+/*   Created: 2023/01/09 14:33:36 by rnovotny          #+#    #+#             */
+/*   Updated: 2023/01/21 18:27:58 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-int	init_map(t_game *game, char *arg)
+char	*ft_strchr(const char *s, int c)
 {
-	int fd;
-	
-	fd = open(arg, O_RDONLY);
-	if (fd < 0)
+	int		i;
+	char	*result;
+
+	i = 0;
+	result = (char *)s;
+	while (s[i] != 0)
 	{
-		ft_printf("Error\nCould not open file\n");
-		return(1);
+		if (s[i] == c)
+			return (&result[i]);
+		i++;
 	}
-	
+	if (c == 0)
+		return (&result[i]);
+	return (0);
 }

@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/09 08:10:32 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
+/*   Created: 2023/01/09 13:27:42 by rnovotny          #+#    #+#             */
+/*   Updated: 2023/01/21 18:12:10 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "libft.h"
 
-void	clean_exit(t_game *data, int code)
+int	ft_isdigit(int c)
 {
-	if (!data)
-		exit(code);
-	if (data->win && data->mlx)
-		mlx_destroy_window(data->mlx, data->win);
-	if (data->mlx)
-	{
-		mlx_destroy_display(data->mlx);
-		mlx_loop_end(data->mlx);
-		free(data->mlx);
-	}
-	free_data(data);
-	exit(code);
-}
-
-int	quit_cub3d(t_game *data)
-{
-	clean_exit(data, 0);
+	if (c >= 48 && c <= 57)
+		return (1);
 	return (0);
 }

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parse_data.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:30:28 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/09 22:30:31 by alexa            ###   ########.fr       */
+/*   Updated: 2024/11/09 12:51:57 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static int	get_number_of_lines(char *path)
 {
@@ -36,7 +36,7 @@ static int	get_number_of_lines(char *path)
 	return (line_count);
 }
 
-static void	fill_tab(int row, int column, int i, t_data *data)
+static void	fill_tab(int row, int column, int i, t_game *data)
 {
 	char	*line;
 
@@ -46,7 +46,7 @@ static void	fill_tab(int row, int column, int i, t_data *data)
 		data->mapinfo.file[row] = ft_calloc(ft_strlen(line) + 1, sizeof(char));
 		if (!data->mapinfo.file[row])
 		{
-			err_msg(NULL, ERR_MALLOC, 0);
+			err_msg(NULL, "malloc error", 0);
 			return (free_tab((void **)data->mapinfo.file));
 		}
 		while (line[i] != '\0')
@@ -60,7 +60,7 @@ static void	fill_tab(int row, int column, int i, t_data *data)
 	data->mapinfo.file[row] = NULL;
 }
 
-void	parse_data(char *path, t_data *data)
+void	parse_data(char *path, t_game *data)
 {
 	int		row;
 	int		i;
@@ -75,7 +75,7 @@ void	parse_data(char *path, t_data *data)
 			+ 1, sizeof(char *));
 	if (!(data->mapinfo.file))
 	{
-		err_msg(NULL, ERR_MALLOC, 0);
+		err_msg(NULL, "malloc error", 0);
 		return ;
 	}
 	data->mapinfo.fd = open(path, O_RDONLY);

@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:11:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 08:11:48 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	free_texinfo(t_texinfo *textures)
 		free(textures->ceiling);
 }
 
-static void	free_map(t_data *data)
+static void	free_map(t_game *data)
 {
 	if (data->mapinfo.fd > 0)
 		close(data->mapinfo.fd);
@@ -55,7 +55,7 @@ static void	free_map(t_data *data)
 		free_tab((void **)data->map);
 }
 
-int	free_data(t_data *data)
+int	free_data(t_game *data)
 {
 	if (data->textures)
 		free_tab((void **)data->textures);

@@ -6,14 +6,22 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 10:33:09 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 12:54:48 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include "../mlx/mlx.h"
+# include "libft/libft.h"
+# include "gnl/get_next_line.h"
+# include <errno.h>
+# include <math.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <unistd.h>
 # include <fcntl.h>
 # include <X11/keysym.h>
 # include <X11/X.h>
@@ -22,6 +30,18 @@
 # define WIN_HEIGHT 480
 
 # define TEX_SIZE 64
+
+# define MOVESPEED 0.0125
+# define ROTSPEED 0.015
+
+# define MMAP_PIXEL_SIZE 128
+# define MMAP_VIEW_DIST 4
+# define MMAP_COLOR_PLAYER 0x00FF00
+# define MMAP_COLOR_WALL 0x808080
+# define MMAP_COLOR_FLOOR 0xE6E6E6
+# define MMAP_COLOR_SPACE 0x404040
+
+# define DIST_EDGE_MOUSE_WRAP 20
 
 enum e_output
 {
@@ -66,6 +86,17 @@ typedef struct s_texinfo
 	int				x;
 	int				y;
 }	t_texinfo;
+
+typedef struct s_minimap
+{
+	char	**map;
+	t_img	*img;
+	int		size;
+	int		offset_x;
+	int		offset_y;
+	int		view_dist;
+	int		tile_size;
+}	t_minimap;
 
 typedef struct s_mapinfo
 {
@@ -114,7 +145,7 @@ typedef struct s_player
 	int		rotate;
 }	t_player;
 
-typedef struct s_data
+typedef struct s_game
 {
 	void		*mlx;
 	void		*win;
@@ -128,62 +159,62 @@ typedef struct s_data
 	int			**textures;
 	t_texinfo	texinfo;
 	t_img		minimap;
-}	t_data;
+}	t_game;
 
 // init/data.c
-void	init_data(t_data *data);
+void	init_data(t_game *data);
 void	init_img_clean(t_img *img);
 void	init_ray(t_ray *ray);
 
 // init/mlx.c
-void	init_mlx(t_data *data);
-void	init_img(t_data *data, t_img *image, int width, int height);
-void	init_texture_img(t_data *data, t_img *image, char *path);
+void	init_mlx(t_game *data);
+void	init_img(t_game *data, t_img *image, int width, int height);
+void	init_texture_img(t_game *data, t_img *image, char *path);
 
 // init/player.c
-void	init_player_direction(t_data *data);
+void	init_player_direction(t_game *data);
 
 // init/textures.c
-void	init_textures(t_data *data);
+void	init_textures(t_game *data);
 void	init_texinfo(t_texinfo *textures);
 
 // rendering.c
-int		render(t_data *data);
-void	render_images(t_data *data);
+int		render(t_game *data);
+void	render_images(t_game *data);
 
 // raycasting.c
-int		raycasting(t_player *player, t_data *data);
+int		raycasting(t_player *player, t_game *data);
 
 // texturing.c
-void	init_texture_pixels(t_data *data);
-void	update_texture_pixels(t_data *data, t_texinfo *tex, t_ray *ray, int x);
+void	init_texture_pixels(t_game *data);
+void	update_texture_pixels(t_game *data, t_texinfo *tex, t_ray *ray, int x);
 void	set_image_pixel(t_img *image, int x, int y, int color);
 
 // render_map.c
-void	render_minimap(t_data *data);
+void	render_minimap(t_game *data);
 
 // render_image.c
-void	render_minimap_image(t_data *data, t_minimap *minimap);
+void	render_minimap_image(t_game *data, t_minimap *minimap);
 
 // handle_input.c
-void	listen_for_input(t_data *data);
+void	listen_for_input(t_game *data);
 
 // check_move.c
-int		validate_move(t_data *data, double new_x, double new_y);
+int		validate_move(t_game *data, double new_x, double new_y);
 
 // move_player.c
-int		move_player(t_data *data);
+int		move_player(t_game *data);
 
 // rotate.c
-int		rotate_player(t_data *data, double rotdir);
+int		rotate_player(t_game *data, double rotdir);
 
 // quit.c
-void	clean_exit(t_data *data, int code);
-int		quit_cub3d(t_data *data);
+void	clean_exit(t_game *data, int code);
+int		quit_cub3d(t_game *data);
 
 // free.c
 void	free_tab(void **tab);
-int		free_data(t_data *data);
+int		free_data(t_game *data);
 
 // error.c
 int		err_msg(char *detail, char *str, int code);
@@ -194,26 +225,26 @@ char	*get_next_line(int fd);
 
 // TODO: just for testing, remove later
 /* parsing/check_args.c */
-int		check_file(char *arg, bool cub);
+int		check_file(char *arg, int cub);
 
 /* parsing/parse_data.c */
-void	parse_data(char *path, t_data *data);
+void	parse_data(char *path, t_game *data);
 
 /* parsing/get_file_data.c */
-int		get_file_data(t_data *data, char **map);
+int		get_file_data(t_game *data, char **map);
 
 /* parsing/fill_color_textures.c */
-int		fill_color_textures(t_data *data, t_texinfo *textures,
+int		fill_color_textures(t_game *data, t_texinfo *textures,
 			char *line, int j);
 
 /* parsing/create_game_map.c */
-int		create_map(t_data *data, char **map, int i);
+int		create_map(t_game *data, char **map, int i);
 
 /* parsing/check_textures.c */
-int		check_textures_validity(t_data *data, t_texinfo *textures);
+int		check_textures_validity(t_game *data, t_texinfo *textures);
 
 /* parsing/check_map.c */
-int		check_map_validity(t_data *data, char **map_tab);
+int		check_map_validity(t_game *data, char **map_tab);
 
 /* parsing/check_map_borders.c */
 int		check_map_sides(t_mapinfo *map, char **map_tab);

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_map_borders.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexa <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:18:01 by alexa             #+#    #+#             */
-/*   Updated: 2023/02/09 22:18:03 by alexa            ###   ########.fr       */
+/*   Updated: 2024/11/09 12:51:44 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 static int	check_top_or_bottom(char **map_tab, int i, int j)
 {
