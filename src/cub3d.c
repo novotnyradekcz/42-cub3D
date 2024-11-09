@@ -6,11 +6,22 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/02 11:25:29 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/09 08:05:41 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static void	print_controls(void)
+{
+	printf("\nWelcome to cub3D the game\n\n");
+	printf("\tmove forward:\tW\n");
+	printf("\tmove backwards:\tS\n");
+	printf("\tmove left:\tA\n");
+	printf("\tmove right:\tD\n");
+	printf("\trotate left:\tleft arrow\n");
+	printf("\trotate right:\tright arrow\n\n");
+}
 
 int	check_extension(char *argv)
 {
@@ -91,20 +102,25 @@ int	main(int argc, char **argv)
 {
 	if (argv[1] && argc == 2)
 	{
-		t_game	game;
+		t_data	data;
 
-		if (check_arg(argv[1]) == 0)
-			return (1);
-		game.mapinfo.fd = open(argv[1], O_RDONLY);
-		if (game.mapinfo.fd < 0)
-		{
-			write("2, Invalid map\n", 15);
-			return (1);
-		}
-		parse_map(&game);
-		// render(&game);
-		// listen_for_input(&game);
-		// clean_exit(&game, 0);
+		// if (check_arg(argv[1]) == 0)
+		// 	return (1);
+		// game.mapinfo.fd = open(argv[1], O_RDONLY);
+		// if (game.mapinfo.fd < 0)
+		// {
+		// 	write("2, Invalid map\n", 15);
+		// 	return (1);
+		// }
+		// parse_map(&game);
+		init_data(&data);
+		init_mlx(&data);
+		init_textures(&data);
+		print_controls();
+		render_images(&data);
+		listen_for_input(&data);
+		mlx_loop_hook(data.mlx, render, &data);
+		mlx_loop(data.mlx);
 	}
 	else
 	{
