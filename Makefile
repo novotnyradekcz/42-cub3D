@@ -6,7 +6,7 @@
 #    By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 11:44:56 by rnovotny          #+#    #+#              #
-#    Updated: 2024/11/09 14:32:05 by rnovotny         ###   ########.fr        #
+#    Updated: 2024/11/16 10:52:14 by rnovotny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,10 @@ SRC =	src/cub3d.c \
 		src/move_player.c \
 		src/parse.c \
 		src/quit.c \
-		src/raycasting.c \
-		src/rendering.c \
+		src/raycast.c \
+		src/render.c \
 		src/rotate.c \
-		src/texturing.c \
+		src/texture.c \
 		src/init/game.c \
 		src/init/mlx.c \
 		src/init/player.c \

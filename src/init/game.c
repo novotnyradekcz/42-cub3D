@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   data.c                                             :+:      :+:    :+:   */
+/*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:18:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 13:58:41 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 09:02:52 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,9 @@ void	init_game(t_game *game)
 	game->win_height = WIN_HEIGHT;
 	game->win_width = WIN_WIDTH;
 	init_player(&game->player);
+	game->texinfo.tex = ft_calloc(4, sizeof * game->texinfo.tex);
+	if (!game->texinfo.tex)
+		clean_exit(game, err_msg(NULL, "malloc error", 1));
 	init_texinfo(&game->texinfo);
 	game->map = NULL;
 	init_mapinfo(&game->mapinfo);

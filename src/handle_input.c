@@ -6,53 +6,53 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:20:48 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:32:21 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 10:37:32 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	key_press_handler(int key, t_game *data)
+static int	key_press_handler(int key, t_game *game)
 {
 	if (key == XK_Escape)
-		quit_cub3d(data);
+		quit_cub3d(game);
 	if (key == XK_Left)
-		data->player.rotate -= 1;
+		game->player.rotate -= 1;
 	if (key == XK_Right)
-		data->player.rotate += 1;
+		game->player.rotate += 1;
 	if (key == XK_w)
-		data->player.move_y = 1;
+		game->player.move_y = 1;
 	if (key == XK_a)
-		data->player.move_x = -1;
+		game->player.move_x = -1;
 	if (key == XK_s)
-		data->player.move_y = -1;
+		game->player.move_y = -1;
 	if (key == XK_d)
-		data->player.move_x = 1;
+		game->player.move_x = 1;
 	return (0);
 }
 
-static int	key_release_handler(int key, t_game *data)
+static int	key_release_handler(int key, t_game *game)
 {
 	if (key == XK_Escape)
-		quit_cub3d(data);
-	if (key == XK_w && data->player.move_y == 1)
-		data->player.move_y = 0;
-	if (key == XK_s && data->player.move_y == -1)
-		data->player.move_y = 0;
-	if (key == XK_a && data->player.move_x == -1)
-		data->player.move_x += 1;
-	if (key == XK_d && data->player.move_x == 1)
-		data->player.move_x -= 1;
-	if (key == XK_Left && data->player.rotate <= 1)
-		data->player.rotate = 0;
-	if (key == XK_Right && data->player.rotate >= -1)
-		data->player.rotate = 0;
+		quit_cub3d(game);
+	if (key == XK_w && game->player.move_y == 1)
+		game->player.move_y = 0;
+	if (key == XK_s && game->player.move_y == -1)
+		game->player.move_y = 0;
+	if (key == XK_a && game->player.move_x == -1)
+		game->player.move_x += 1;
+	if (key == XK_d && game->player.move_x == 1)
+		game->player.move_x -= 1;
+	if (key == XK_Left && game->player.rotate <= 1)
+		game->player.rotate = 0;
+	if (key == XK_Right && game->player.rotate >= -1)
+		game->player.rotate = 0;
 	return (0);
 }
 
-void	listen_for_input(t_game *data)
+void	listen_for_input(t_game *game)
 {
-	mlx_hook(data->win, ClientMessage, NoEventMask, quit_cub3d, data);
-	mlx_hook(data->win, KeyPress, KeyPressMask, key_press_handler, data);
-	mlx_hook(data->win, KeyRelease, KeyReleaseMask, key_release_handler, data);
+	mlx_hook(game->win, ClientMessage, NoEventMask, quit_cub3d, game);
+	mlx_hook(game->win, KeyPress, KeyPressMask, key_press_handler, game);
+	mlx_hook(game->win, KeyRelease, KeyReleaseMask, key_release_handler, game);
 }

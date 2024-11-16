@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 15:44:13 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 10:51:37 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,11 @@ typedef struct s_img
 
 typedef struct s_texinfo
 {
-	char			*north; // merge this
-	char			*south; // into
-	char			*west; // one
-	char			*east; // **char
+	// char			*north; // merge this
+	// char			*south; // into
+	// char			*west; // one
+	// char			*east; // **char
+	char			**tex; // array
 	int				*floor;
 	int				*ceiling;
 	unsigned long	hex_floor;
@@ -161,22 +162,32 @@ typedef struct s_game
 	t_img		minimap;
 }	t_game;
 
-// init/data.c
-void	init_game(t_game *data);
+
+// gnl/get_next_line.c
+char	*get_next_line(int fd);
+
+// init/game.c
+void	init_game(t_game *game);
 void	init_img_clean(t_img *img);
 void	init_ray(t_ray *ray);
 
 // init/mlx.c
-void	init_mlx(t_game *data);
-void	init_img(t_game *data, t_img *image, int width, int height);
-void	init_texture_img(t_game *data, t_img *image, char *path);
+void	init_mlx(t_game *game);
+void	init_img(t_game *game, t_img *image, int width, int height);
+void	init_texture_img(t_game *game, t_img *image, char *path);
 
 // init/player.c
-void	init_player_direction(t_game *data);
+void	init_player_direction(t_game *game);
 
 // init/textures.c
-void	init_textures(t_game *data);
-void	init_texinfo(t_texinfo *textures);
+void	init_textures(t_game *game);
+void	init_texinfo(t_texinfo *texinfo);
+
+// minimap/render_image.c
+void	render_minimap_image(t_game *game, t_minimap *minimap);
+
+// minimap/render_map.c
+void	render_minimap(t_game *game);
 
 // rendering.c
 int		render(t_game *data);
@@ -190,38 +201,41 @@ void	init_texture_pixels(t_game *data);
 void	update_texture_pixels(t_game *data, t_texinfo *tex, t_ray *ray, int x);
 void	set_image_pixel(t_img *image, int x, int y, int color);
 
-// render_map.c
-void	render_minimap(t_game *data);
-
-// render_image.c
-void	render_minimap_image(t_game *data, t_minimap *minimap);
-
-// handle_input.c
-void	listen_for_input(t_game *data);
-
 // check_move.c
-int		check_move(t_game *data, double new_x, double new_y);
-
-// move_player.c
-int		move_player(t_game *data);
-
-// rotate.c
-int		rotate_player(t_game *data, double rotdir);
-
-// quit.c
-void	clean_exit(t_game *data, int code);
-int		quit_cub3d(t_game *data);
-
-// free.c
-void	free_tab(void **tab);
-int		free_data(t_game *data);
+int		check_move(t_game *game, double new_x, double new_y);
 
 // error.c
 int		err_msg(char *detail, char *str, int code);
 int		err_msg_val(int detail, char *str, int code);
 
-// gnl/get_next_line.c
-char	*get_next_line(int fd);
+// free.c
+void	free_tab(void **tab);
+int		free_game(t_game *game);
+
+// handle_input.c
+void	listen_for_input(t_game *game);
+
+// move_player.c
+int		move_player(t_game *game);
+
+// quit.c
+void	clean_exit(t_game *game, int code);
+int		quit_cub3d(t_game *game);
+
+// render.c
+int		render(t_game *game);
+void	render_images(t_game *game);
+
+// raycast.c
+int		raycasting(t_player *player, t_game *game);
+
+// rotate.c
+int		rotate_player(t_game *game, double rotdir);
+
+// texture.c
+void	update_texture_pixels(t_game *game, t_texinfo *tex, t_ray *ray, int x);
+void	init_texture_pixels(t_game *game);
+
 
 // TODO: just for testing, remove later
 /* parsing/check_args.c */

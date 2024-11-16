@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:29:02 by alexa             #+#    #+#             */
-/*   Updated: 2024/11/09 12:57:53 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 08:51:16 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,15 @@ static unsigned long	convert_rgb_to_hex(int *rgb_tab)
 
 int	check_textures_validity(t_game *data, t_texinfo *textures)
 {
-	if (!textures->north || !textures->south || !textures->west
-		|| !textures->east)
+	if (!textures->tex[NORTH] || !textures->tex[SOUTH] || !textures->tex[WEST]
+		|| !textures->tex[EAST])
 		return (err_msg(data->mapinfo.path, "missing texture", FAILURE));
 	if (!textures->floor || !textures->ceiling)
 		return (err_msg(data->mapinfo.path, "missing color", FAILURE));
-	if (check_file(textures->north, 0) == FAILURE
-		|| check_file(textures->south, 0) == FAILURE
-		|| check_file(textures->west, 0) == FAILURE
-		|| check_file(textures->east, 0) == FAILURE
+	if (check_file(textures->tex[NORTH], 0) == FAILURE
+		|| check_file(textures->tex[SOUTH], 0) == FAILURE
+		|| check_file(textures->tex[WEST], 0) == FAILURE
+		|| check_file(textures->tex[EAST], 0) == FAILURE
 		|| check_valid_rgb(textures->floor) == FAILURE
 		|| check_valid_rgb(textures->ceiling) == FAILURE)
 		return (FAILURE);

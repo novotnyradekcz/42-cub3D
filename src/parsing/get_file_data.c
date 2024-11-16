@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 22:29:52 by alexa             #+#    #+#             */
-/*   Updated: 2024/11/09 12:59:07 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 08:52:49 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ static int	fill_direction_textures(t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 2] && ft_isprint(line[j + 2]))
 		return (ERR);
-	if (line[j] == 'N' && line[j + 1] == 'O' && !(textures->north))
-		textures->north = get_texture_path(line, j + 2);
-	else if (line[j] == 'S' && line[j + 1] == 'O' && !(textures->south))
-		textures->south = get_texture_path(line, j + 2);
-	else if (line[j] == 'W' && line[j + 1] == 'E' && !(textures->west))
-		textures->west = get_texture_path(line, j + 2);
-	else if (line[j] == 'E' && line[j + 1] == 'A' && !(textures->east))
-		textures->east = get_texture_path(line, j + 2);
+	if (line[j] == 'N' && line[j + 1] == 'O' && !(textures->tex[NORTH]))
+		textures->tex[NORTH] = get_texture_path(line, j + 2);
+	else if (line[j] == 'S' && line[j + 1] == 'O' && !(textures->tex[SOUTH]))
+		textures->tex[SOUTH] = get_texture_path(line, j + 2);
+	else if (line[j] == 'W' && line[j + 1] == 'E' && !(textures->tex[WEST]))
+		textures->tex[WEST] = get_texture_path(line, j + 2);
+	else if (line[j] == 'E' && line[j + 1] == 'A' && !(textures->tex[EAST]))
+		textures->tex[EAST] = get_texture_path(line, j + 2);
 	else
 		return (ERR);
 	return (SUCCESS);

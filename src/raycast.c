@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   reycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:34:36 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:32:32 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 10:44:58 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 /*
-We initialize the set up for the rays
+- we initialize the set up for the rays
 - camera_x -> Where is the camera (-1 = left, 0 = center, 1 = right)
 - dir_x/y = direction of the ray
 - map_x/y = current square of the ray
@@ -33,8 +33,8 @@ static void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 }
 
 /*
-- We are doing the initial set up for the dda
-- dda algorithm will jump one square in each loop eiter in a x or y direction
+- we are doing the initial set up
+- dwe will jump one square in each loop eiter in a x or y direction
 - ray->sidedist_x or y = distance from the ray start position to the
 	next x or y position
 - if x or y < 0 go the next x or y to the left
@@ -66,12 +66,11 @@ static void	set_dda(t_ray *ray, t_player *player)
 }
 
 /*
-- We implement the DDA algorithm -> the loop will increment 1 square 
--   until we hit a wall
+- the loop will increment 1 square until we hit a wall
 - If the sidedistx < sidedisty, x is the closest point from the ray
 */
 
-static void	perform_dda(t_game *data, t_ray *ray)
+static void	perform_dda(t_game *game, t_ray *ray)
 {
 	int	hit;
 
@@ -92,27 +91,27 @@ static void	perform_dda(t_game *data, t_ray *ray)
 		}
 		if (ray->map_y < 0.25
 			|| ray->map_x < 0.25
-			|| ray->map_y > data->mapinfo.height - 0.25
-			|| ray->map_x > data->mapinfo.width - 1.25)
+			|| ray->map_y > game->mapinfo.height - 0.25
+			|| ray->map_x > game->mapinfo.width - 1.25)
 			break ;
-		else if (data->map[ray->map_y][ray->map_x] > '0')
+		else if (game->map[ray->map_y][ray->map_x] > '0')
 			hit = 1;
 	}
 }
 
-static void	calculate_line_height(t_ray *ray, t_game *data, t_player *player)
+static void	calculate_line_height(t_ray *ray, t_game *game, t_player *player)
 {
 	if (ray->side == 0)
 		ray->wall_dist = (ray->sidedist_x - ray->deltadist_x);
 	else
 		ray->wall_dist = (ray->sidedist_y - ray->deltadist_y);
-	ray->line_height = (int)(data->win_height / ray->wall_dist);
-	ray->draw_start = -(ray->line_height) / 2 + data->win_height / 2;
+	ray->line_height = (int)(game->win_height / ray->wall_dist);
+	ray->draw_start = -(ray->line_height) / 2 + game->win_height / 2;
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + data->win_height / 2;
-	if (ray->draw_end >= data->win_height)
-		ray->draw_end = data->win_height - 1;
+	ray->draw_end = ray->line_height / 2 + game->win_height / 2;
+	if (ray->draw_end >= game->win_height)
+		ray->draw_end = game->win_height - 1;
 	if (ray->side == 0)
 		ray->wall_x = player->pos_y + ray->wall_dist * ray->dir_y;
 	else
@@ -120,20 +119,20 @@ static void	calculate_line_height(t_ray *ray, t_game *data, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-int	raycasting(t_player *player, t_game *data)
+int	raycasting(t_player *player, t_game *game)
 {
 	t_ray	ray;
 	int		x;
 
 	x = 0;
-	ray = data->ray;
-	while (x < data->win_width)
+	ray = game->ray;
+	while (x < game->win_width)
 	{
 		init_raycasting_info(x, &ray, player);
 		set_dda(&ray, player);
-		perform_dda(data, &ray);
-		calculate_line_height(&ray, data, player);
-		update_texture_pixels(data, &data->texinfo, &ray, x);
+		perform_dda(game, &ray);
+		calculate_line_height(&ray, game, player);
+		update_texture_pixels(game, &game->texinfo, &ray, x);
 		x++;
 	}
 	return (SUCCESS);

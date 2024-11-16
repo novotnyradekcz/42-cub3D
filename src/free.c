@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:11:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:30:26 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 10:34:34 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,39 +29,41 @@ void	free_tab(void **tab)
 	}
 }
 
-static void	free_texinfo(t_texinfo *textures)
+static void	free_texinfo(t_texinfo *texinfo)
 {
-	if (textures->north)
-		free(textures->north);
-	if (textures->south)
-		free(textures->south);
-	if (textures->west)
-		free(textures->west);
-	if (textures->east)
-		free(textures->east);
-	if (textures->floor)
-		free(textures->floor);
-	if (textures->ceiling)
-		free(textures->ceiling);
+	if (texinfo->tex[NORTH])
+		free(texinfo->tex[NORTH]);
+	if (texinfo->tex[SOUTH])
+		free(texinfo->tex[SOUTH]);
+	if (texinfo->tex[WEST])
+		free(texinfo->tex[WEST]);
+	if (texinfo->tex[EAST])
+		free(texinfo->tex[EAST]);
+	if (texinfo->tex)
+		free(texinfo->tex);
+	if (texinfo->floor)
+		free(texinfo->floor);
+	if (texinfo->ceiling)
+		free(texinfo->ceiling);
 }
 
-static void	free_map(t_game *data)
+static void	free_map(t_game *game)
 {
-	if (data->mapinfo.fd > 0)
-		close(data->mapinfo.fd);
-	if (data->mapinfo.file)
-		free_tab((void **)data->mapinfo.file);
-	if (data->map)
-		free_tab((void **)data->map);
+	if (game->mapinfo.fd > 0)
+		close(game->mapinfo.fd);
+	if (game->mapinfo.file)
+		free_tab((void **)game->mapinfo.file);
+	if (game->map)
+		free_tab((void **)game->map);
 }
 
-int	free_data(t_game *data)
+int	free_game(t_game *game)
 {
-	if (data->textures)
-		free_tab((void **)data->textures);
-	if (data->texture_pixels)
-		free_tab((void **)data->texture_pixels);
-	free_texinfo(&data->texinfo);
-	free_map(data);
+	if (game->textures)
+		free_tab((void **)game->textures);
+	if (game->texture_pixels)
+		free_tab((void **)game->texture_pixels);
+	free_texinfo(&game->texinfo);
+	free_map(game);
 	return (FAILURE);
 }
