@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
+/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 10:51:37 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:58:07 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ typedef struct s_texinfo
 	// char			*west; // one
 	// char			*east; // **char
 	char			**tex; // array
-	int				*floor;
-	int				*ceiling;
+	// int				*floor;
+	// int				*ceiling;
+	
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
 	int				size;
@@ -102,12 +103,17 @@ typedef struct s_minimap
 typedef struct s_mapinfo
 {
 	int			fd;
-	int			line_count;
+	char		*texture_path[4];
+	char		*f_c;
+	char		*c_c;
+	// int			line_count;
 	char		*path;
 	char		**file;
 	int			height;
 	int			width;
 	int			index_end_of_map;
+	int			map_started;
+	int			map_info;
 }	t_mapinfo;
 
 typedef struct s_ray
@@ -130,6 +136,20 @@ typedef struct s_ray
 	int		draw_start;
 	int		draw_end;
 }	t_ray;
+
+typedef struct s_check
+{
+	int	no;
+	int	so;
+	int	ea;
+	int	we;
+	int	c;
+	int	f;
+	int	n;
+	int	s;
+	int	e;
+	int	w;
+}	t_check;
 
 typedef struct s_player
 {
@@ -160,11 +180,13 @@ typedef struct s_game
 	int			**textures;
 	t_texinfo	texinfo;
 	t_img		minimap;
+	t_check		check;
 }	t_game;
 
 
 // gnl/get_next_line.c
 char	*get_next_line(int fd);
+
 
 // init/game.c
 void	init_game(t_game *game);
@@ -237,35 +259,74 @@ void	update_texture_pixels(t_game *game, t_texinfo *tex, t_ray *ray, int x);
 void	init_texture_pixels(t_game *game);
 
 
-// TODO: just for testing, remove later
-/* parsing/check_args.c */
-int		check_file(char *arg, int cub);
+// // TODO: just for testing, remove later
+// /* parsing/check_args.c */
+// int		check_file(char *arg, int cub);
 
-/* parsing/parse_data.c */
-void	parse_data(char *path, t_game *data);
+// /* parsing/parse_data.c */
+// void	parse_data(char *path, t_game *data);
 
-/* parsing/get_file_data.c */
-int		get_file_data(t_game *data, char **map);
+// /* parsing/get_file_data.c */
+// int		get_file_data(t_game *data, char **map);
 
-/* parsing/fill_color_textures.c */
-int		fill_color_textures(t_game *data, t_texinfo *textures,
-			char *line, int j);
+// /* parsing/fill_color_textures.c */
+// int		fill_color_textures(t_game *data, t_texinfo *textures,
+// 			char *line, int j);
 
-/* parsing/create_game_map.c */
-int		create_map(t_game *data, char **map, int i);
+// /* parsing/create_game_map.c */
+// int		create_map(t_game *data, char **map, int i);
 
-/* parsing/check_textures.c */
-int		check_textures_validity(t_game *data, t_texinfo *textures);
+// /* parsing/check_textures.c */
+// int		check_textures_validity(t_game *data, t_texinfo *textures);
 
-/* parsing/check_map.c */
-int		check_map_validity(t_game *data, char **map_tab);
+// /* parsing/check_map.c */
+// int		check_map_validity(t_game *data, char **map_tab);
 
-/* parsing/check_map_borders.c */
-int		check_map_sides(t_mapinfo *map, char **map_tab);
+// /* parsing/check_map_borders.c */
+// int		check_map_sides(t_mapinfo *map, char **map_tab);
 
-/* parsing/parsing_utils.c */
-int		is_a_white_space(char c);
-size_t	find_biggest_len(t_mapinfo *map, int i);
+// /* parsing/parsing_utils.c */
+// int		is_a_white_space(char c);
+// size_t	find_biggest_len(t_mapinfo *map, int i);
+
+//check_arg_mapinfo.c
+
+void	count_map_char(t_game *game, char letter);
+int		mapinfo_checker(char *line, t_game *game);
+int		check_map(t_game *game);
+int		is_empty_line(char *line);
+int		empty_line(char *line);
+
+//check_arg_stats.c
+int		check_map_char(char *line, t_game *game);
+void	check_map_char_2(char *line, t_game *game);
+int		check_stats(char *line, t_game *game);
+int		check_mapinfo(t_game *game);
+
+//check_arg.c
+int		check_extension(char *argv);
+int		check_map_file_helper(int fd, char *line, t_game *game);
+int		check_map_file(int fd, t_game *game);
+int		check_arg(char *argv, t_game *game);
+
+//check_walls.c
+void	check_walls(t_game *game);
 
 
+//ending_game.c
+void	free_all(t_game *game);
+void	free_a(t_game *game);
+void	close_exit(t_game *game, char *message);
+
+//game_before_beginning.c
+void	game_before_beginning(t_game *game);
+
+//get_stats.c
+void	get_stats_paths(char *line, t_game *game);
+
+//map_info_utils.c
+void	map_width(char *line, t_game *game);
+
+//map_to_game.c
+int		map_to_game(t_game *game, char *arg);
 #endif

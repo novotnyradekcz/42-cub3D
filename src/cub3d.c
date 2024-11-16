@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
+/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 15:08:51 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:02:55 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,51 +98,51 @@ void	init_game(t_game  *game)
 	// game->player.rotate = 0;
 }
 */
-static int	parse_args(t_game *data, char **av)
-{
-	if (check_file(av[1], 1) == FAILURE)
-		clean_exit(data, FAILURE);
-	// parse_data(av[1], data);
-	// if (get_file_data(data, data->mapinfo.file) == FAILURE)
-	// 	return (free_data(data));
-	// if (check_map_validity(data, data->map) == FAILURE)
-	// 	return (free_data(data));
-	// if (check_textures_validity(data, &data->texinfo) == FAILURE)
-	// 	return (free_data(data));
-	data->mapinfo.width = 10;
-	data->mapinfo.height = 5;
-	data->map = malloc(sizeof(char *) * (data->mapinfo.height + 1));
-	data->map[0] = strdup("1111111111");
-	data->map[1] = strdup("1000000001");
-	data->map[2] = strdup("1001111001");
-	data->map[3] = strdup("1000000001");
-	data->map[4] = strdup("1111111111");
-	data->map[5] = NULL;
-	// data->texinfo.ceiling = malloc(sizeof(int) * 3);
-	// data->texinfo.floor = malloc(sizeof(int) * 3);
-	// data->texinfo.ceiling[0] = 100;
-	// data->texinfo.floor[0] = 200;
-	// data->texinfo.ceiling[1] = 0;
-	// data->texinfo.floor[1] = 0;
-	// data->texinfo.ceiling[2] = 200;
-	// data->texinfo.floor[2] = 100;
-	data->texinfo.hex_ceiling = 0xBADBED;
-	data->texinfo.hex_floor = 0xFFA490;
-	data->player.pos_x = 4;
-	data->player.pos_y = 3.5;
-	data->player.dir = 'N';
+// static int	parse_args(t_game *data, char **av)
+// {
+// 	if (check_file(av[1], 1) == FAILURE)
+// 		clean_exit(data, FAILURE);
+// 	// parse_data(av[1], data);
+// 	// if (get_file_data(data, data->mapinfo.file) == FAILURE)
+// 	// 	return (free_data(data));
+// 	// if (check_map_validity(data, data->map) == FAILURE)
+// 	// 	return (free_data(data));
+// 	// if (check_textures_validity(data, &data->texinfo) == FAILURE)
+// 	// 	return (free_data(data));
+// 	data->mapinfo.width = 10;
+// 	data->mapinfo.height = 5;
+// 	data->map = malloc(sizeof(char *) * (data->mapinfo.height + 1));
+// 	data->map[0] = strdup("1111111111");
+// 	data->map[1] = strdup("1000000001");
+// 	data->map[2] = strdup("1001111001");
+// 	data->map[3] = strdup("1000000001");
+// 	data->map[4] = strdup("1111111111");
+// 	data->map[5] = NULL;
+// 	// data->texinfo.ceiling = malloc(sizeof(int) * 3);
+// 	// data->texinfo.floor = malloc(sizeof(int) * 3);
+// 	// data->texinfo.ceiling[0] = 100;
+// 	// data->texinfo.floor[0] = 200;
+// 	// data->texinfo.ceiling[1] = 0;
+// 	// data->texinfo.floor[1] = 0;
+// 	// data->texinfo.ceiling[2] = 200;
+// 	// data->texinfo.floor[2] = 100;
+// 	data->texinfo.hex_ceiling = 0xBADBED;
+// 	data->texinfo.hex_floor = 0xFFA490;
+// 	data->player.pos_x = 4;
+// 	data->player.pos_y = 3.5;
+// 	data->player.dir = 'N';
 	
-	init_player_direction(data);
-	// if (DEBUG_MSG)
-	// 	debug_display_data(data);
-	return (0);
-}
+// 	init_player_direction(data);
+// 	// if (DEBUG_MSG)
+// 	// 	debug_display_data(data);
+// 	return (0);
+// }
 
 int	main(int argc, char **argv)
 {
 	if (argv[1] && argc == 2)
 	{
-		t_game	data;
+		t_game	game;
 
 		// if (check_arg(argv[1]) == 0)
 		// 	return (1);
@@ -153,16 +153,26 @@ int	main(int argc, char **argv)
 		// 	return (1);
 		// }
 		// parse_map(&game);
-		init_game(&data);
-		if (parse_args(&data, argv) != 0)
+		init_game(&game);
+		if (check_arg(argv[1], &game))
 			return (1);
-		init_mlx(&data);
-		init_textures(&data);
+		if (map_to_game(&game, argv[1]))
+			return (1);
+		check_walls(&game);
+		game_before_beginning(&game);
+		
+		// init_game(&data);
+		// if (parse_args(&data, argv) != 0)
+		// 	return (1);
+
+		
+		init_mlx(&game);
+		init_textures(&game);
 		print_controls();
-		render_images(&data);
-		listen_for_input(&data);
-		mlx_loop_hook(data.mlx, render, &data);
-		mlx_loop(data.mlx);
+		render_images(&game);
+		listen_for_input(&game);
+		mlx_loop_hook(game.mlx, render, &game);
+		mlx_loop(game.mlx);
 	}
 	else
 	{

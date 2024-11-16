@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+         #
+#    By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 11:44:56 by rnovotny          #+#    #+#              #
-#    Updated: 2024/11/16 10:52:14 by rnovotny         ###   ########.fr        #
+#    Updated: 2024/11/16 13:14:34 by lmaresov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = cub3D
 
 CC = cc
 
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra 
 
 SRC =	src/cub3d.c \
 		src/check_move.c \
@@ -22,7 +22,6 @@ SRC =	src/cub3d.c \
 		src/free.c \
 		src/handle_input.c \
 		src/move_player.c \
-		src/parse.c \
 		src/quit.c \
 		src/raycast.c \
 		src/render.c \
@@ -34,15 +33,6 @@ SRC =	src/cub3d.c \
 		src/init/textures.c \
 		src/minimap/render_image.c \
 		src/minimap/render_map.c \
-		src/parsing/check_args.c \
-		src/parsing/check_map_borders.c \
-		src/parsing/check_map.c \
-		src/parsing/check_textures.c \
-		src/parsing/create_game_map.c \
-		src/parsing/fill_color_textures.c \
-		src/parsing/get_file_data.c \
-		src/parsing/parse_data.c \
-		src/parsing/parsing_utils.c \
 		src/gnl/get_next_line.c \
 		src/gnl/get_next_line_utils.c \
 		src/libft/ft_atoi.c \
@@ -54,7 +44,19 @@ SRC =	src/cub3d.c \
 		src/libft/ft_split.c \
 		src/libft/ft_strchr.c \
 		src/libft/ft_strdup.c \
-		src/libft/ft_strlen.c
+		src/libft/ft_strlen.c \
+		src/libft/ft_strlcpy.c \
+		src/libft/ft_memcpy.c\
+		src/libft/ft_strncmp.c\
+		src/libft/ft_isascii.c\
+		src/check_parse/check_arg_mapinfo.c\
+		src/check_parse/check_arg_stats.c\
+		src/check_parse/check_arg.c\
+		src/check_parse/check_walls.c\
+		src/check_parse/game_before_beginning.c\
+		src/check_parse/get_stats.c\
+		src/check_parse/map_info_utils.c\
+		src/check_parse/map_to_game.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -63,12 +65,12 @@ INC =	-I/usr/X11/include \
 
 MLX_LIB = mlx/
 
-MLX_FLAGS = -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11
+MLX_FLAGS = -Lmlx -lmlx -L/usr/X11/lib -lXext -lX11 
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -lm -o $(NAME)
 
 %.o: %.c
 	@if [ ! -d "$(MLX_LIB)" ]; then \

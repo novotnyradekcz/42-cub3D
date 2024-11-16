@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
+/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:18:03 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 12:06:23 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:42:21 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ void	init_texinfo(t_texinfo *texinfo)
 	texinfo->tex[SOUTH] = NULL;
 	texinfo->tex[WEST] = NULL;
 	texinfo->tex[EAST] = NULL;
-	texinfo->floor = 0;
-	texinfo->ceiling = 0;
+	// texinfo->floor = 0;
+	// texinfo->ceiling = 0;
 	texinfo->hex_floor = 0x0;
 	texinfo->hex_ceiling = 0x0;
 	texinfo->size = TEX_SIZE;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
+/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:18:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 09:02:52 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 13:03:51 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,32 @@ void	init_ray(t_ray *ray)
 	ray->draw_end = 0;
 }
 
+void	init_check_game(t_game *game)
+{
+	game->check.c = 0;
+	game->check.ea = 0;
+	game->check.f = 0;
+	game->check.no = 0;
+	game->check.so = 0;
+	game->check.we = 0;
+	game->check.n = 0;
+	game->check.s = 0;
+	game->check.e = 0;
+	game->check.w = 0;
+}
+
 static void	init_mapinfo(t_mapinfo *mapinfo)
 {
 	mapinfo->fd = 0;
-	mapinfo->line_count = 0;
+	// mapinfo->line_count = 0;
 	mapinfo->path = NULL;
 	mapinfo->file = NULL;
 	mapinfo->height = 0;
 	mapinfo->width = 0;
 	mapinfo->index_end_of_map = 0;
+	mapinfo->map_info = 0;
+	mapinfo->map_started = 0;
+	
 }
 
 static void	init_player(t_player *player)
@@ -74,6 +91,7 @@ void	init_game(t_game *game)
 	game->win = NULL;
 	game->win_height = WIN_HEIGHT;
 	game->win_width = WIN_WIDTH;
+	init_check_game(game);
 	init_player(&game->player);
 	game->texinfo.tex = ft_calloc(4, sizeof * game->texinfo.tex);
 	if (!game->texinfo.tex)

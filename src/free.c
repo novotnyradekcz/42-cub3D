@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
+/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:11:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 10:34:34 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:55:18 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,10 @@ static void	free_texinfo(t_texinfo *texinfo)
 		free(texinfo->tex[EAST]);
 	if (texinfo->tex)
 		free(texinfo->tex);
-	if (texinfo->floor)
-		free(texinfo->floor);
-	if (texinfo->ceiling)
-		free(texinfo->ceiling);
+	// if (texinfo->floor)
+	// 	free(texinfo->floor);
+	// if (texinfo->ceiling)
+	// 	free(texinfo->ceiling);
 }
 
 static void	free_map(t_game *game)
@@ -59,6 +59,7 @@ static void	free_map(t_game *game)
 
 int	free_game(t_game *game)
 {
+	free_all(game);
 	if (game->textures)
 		free_tab((void **)game->textures);
 	if (game->texture_pixels)
