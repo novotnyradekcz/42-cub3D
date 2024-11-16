@@ -6,27 +6,27 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/23 20:28:35 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/09 12:42:07 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:05:58 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*output_line(char *mystr)
+char	*output_line(char *str)
 {
 	int		i;
 	char	*outputline;
 
 	i = 0;
-	outputline = (char *)malloc((ft_strlen_end(mystr, '\n') + 2) * sizeof(char));
+	outputline = (char *)malloc((ft_strlen_end(str, '\n') + 2) * sizeof(char));
 	if (!outputline)
 		return (0);
-	while (mystr[i] != '\n' && mystr[i] != '\0')
+	while (str[i] != '\n' && str[i] != '\0')
 	{
-		outputline[i] = mystr[i];
+		outputline[i] = str[i];
 		i++;
 	}
-	outputline[i] = mystr[i];
+	outputline[i] = str[i];
 	outputline[i + 1] = '\0';
 	return (outputline);
 }
