@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:13:05 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 10:54:47 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/16 12:07:15 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,5 @@ void	init_mlx(t_game *game)
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	if (!game->win)
 		clean_exit(game, err_msg("mlx", "mlx window error", 1));
-	// if (BONUS)
-	// 	mlx_mouse_move(data->mlx, data->win, data->win_width / 2,
-	// 		data->win_height / 2);
 	return ;
 }
