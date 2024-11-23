@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
+/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:37:21 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 10:53:49 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/23 13:03:19 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	update_texture_pixels(t_game *game, t_texinfo *tex, t_ray *ray, int x)
 {
 	int			y;
 	int			color;
+	// (void)x;
 
 	get_texture_index(game, ray);
 	tex->x = (int)(ray->wall_x * tex->size);
@@ -78,8 +79,8 @@ void	update_texture_pixels(t_game *game, t_texinfo *tex, t_ray *ray, int x)
 		tex->y = (int)tex->pos & (tex->size - 1);
 		tex->pos += tex->step;
 		color = game->textures[tex->index][tex->size * tex->y + tex->x];
-		if (tex->index == NORTH || tex->index == EAST)
-			color = (color >> 1) & 8355711;
+		// if (tex->index == NORTH || tex->index == EAST)
+		// 	color = (color >> 1) & 8355711;
 		if (color > 0)
 			game->texture_pixels[y][x] = color;
 		y++;
