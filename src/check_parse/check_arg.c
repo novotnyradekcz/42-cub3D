@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_arg.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 09:13:30 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/16 12:03:08 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:24:49 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,11 @@ int	check_map_file_helper(int fd, char *line, t_game *game)
 int	check_map_file(int fd, t_game *game)
 {
 	char	*line;
-	int		i;
+	// int		i;
 
 	while (!game->mapinfo.map_started)
 	{
-		i = 0;
+		// i = 0;
 		line = get_next_line(fd);
 		if (!line)
 			return (1);

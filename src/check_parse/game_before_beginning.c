@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_before_beginning.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 15:08:46 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/16 13:09:34 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:33:52 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ void	game_before_beginning(t_game *game)
 			get_player_dir(game, j, i);
 			if (ft_strchr("NSEW", game->map[j][i]))
 			{
-				game->player.pos_x = i;
-				game->player.pos_y = j;
+				game->player.pos_x = i + 0.5;
+				game->player.pos_y = j + 0.5;
 				game->map[j][i] = '0';
 				return ;
 			}

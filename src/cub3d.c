@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 13:02:55 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/23 11:41:57 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,7 @@ int	main(int argc, char **argv)
 		
 		init_mlx(&game);
 		init_textures(&game);
+		init_player_direction(&game);
 		print_controls();
 		render_images(&game);
 		listen_for_input(&game);

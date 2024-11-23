@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:18:03 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 12:42:21 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/22 22:52:11 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,18 @@ void	init_textures(t_game *game)
 	game->textures = ft_calloc(5, sizeof * game->textures);
 	if (!game->textures)
 		clean_exit(game, err_msg(NULL, "malloc error", 1));
-	// data->textures[NORTH] = xpm_to_img(data, data->texinfo.north);
-	// data->textures[SOUTH] = xpm_to_img(data, data->texinfo.south);
-	// data->textures[EAST] = xpm_to_img(data, data->texinfo.east);
-	// data->textures[WEST] = xpm_to_img(data, data->texinfo.west);
-	game->textures[NORTH] = xpm_to_img(game, "textures/wolfenstein/blue_stone.xpm");
-	game->textures[SOUTH] = xpm_to_img(game, "textures/wolfenstein/color_stone.xpm");
-	game->textures[EAST] = xpm_to_img(game, "textures/wolfenstein/grey_stone.xpm");
-	game->textures[WEST] = xpm_to_img(game, "textures/wolfenstein/purple_stone.xpm");
+	// game->textures[NORTH] = xpm_to_img(game, game->texinfo.tex[NORTH]);
+	// game->textures[SOUTH] = xpm_to_img(game, game->texinfo.tex[SOUTH]);
+	// game->textures[EAST] = xpm_to_img(game, game->texinfo.tex[EAST]);
+	// game->textures[WEST] = xpm_to_img(game, game->texinfo.tex[WEST]);
+	// game->textures[NORTH] = xpm_to_img(game, "textures/wolfenstein/blue_stone.xpm");
+	// game->textures[SOUTH] = xpm_to_img(game, "textures/wolfenstein/color_stone.xpm");
+	// game->textures[EAST] = xpm_to_img(game, "textures/wolfenstein/grey_stone.xpm");
+	// game->textures[WEST] = xpm_to_img(game, "textures/wolfenstein/purple_stone.xpm");
+	game->textures[NORTH] = xpm_to_img(game, game->mapinfo.texture_path[NORTH]);
+	game->textures[SOUTH] = xpm_to_img(game, game->mapinfo.texture_path[SOUTH]);
+	game->textures[EAST] = xpm_to_img(game, game->mapinfo.texture_path[EAST]);
+	game->textures[WEST] = xpm_to_img(game, game->mapinfo.texture_path[WEST]);
 }
 
 void	init_texinfo(t_texinfo *texinfo)

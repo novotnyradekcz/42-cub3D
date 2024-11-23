@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 12:58:07 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/23 12:04:52 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 960
 
 # define TEX_SIZE 64
 
 # define COLLISION_DIST 0.04
 
-# define MOVE_SPEED 0.0125
-# define ROT_SPEED 0.015
+# define MOVE_SPEED 0.025
+# define ROT_SPEED 0.025
 
 # define MMAP_PIXEL_SIZE 128
 # define MMAP_VIEW_DIST 4
@@ -54,10 +54,10 @@ enum e_output
 
 enum e_texture_index
 {
-	NORTH = 0,
-	SOUTH = 1,
-	EAST = 2,
-	WEST = 3
+	EAST = 0,
+	NORTH = 1,
+	WEST = 2,
+	SOUTH = 3
 };
 
 typedef struct s_img
