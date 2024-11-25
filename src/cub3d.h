@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/25 09:04:10 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:22:21 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,7 @@ int		check_move(t_game *game, double new_x, double new_y);
 
 // error.c
 int		err_msg(char *detail, char *str, int code);
-int		err_msg_val(int detail, char *str, int code);
+// int		err_msg_val(int detail, char *str, int code);
 
 // free.c
 void	free_texinfo_tex(t_game *game);
