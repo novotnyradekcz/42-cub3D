@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 18:35:17 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/16 12:03:10 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/25 09:27:32 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,13 @@ void	check_vertical_walls(t_game *game)
 			while (map[j][i] != '\0' && map[j][i] == ' ')
 				i++;
 			if (map[j][i] != '\0' && map[j][i] != '1')
-				close_exit(game, "error in vertical wall\n");
+				close_exit(game, "Error\nIncomplete vertical wall\n");
 			while (map[j][i] != '\0' && ft_strchr("10NESW", map[j][i]))
 				i++;
 			if (map[j][i] == '\0' && map[j][i - 1] == ' ')
 				break ;
 			if (map[j][i - 1] != '1')
-				close_exit(game, "error in vertical wall\n");
+				close_exit(game, "Error\nIncomplete vertical wall\n");
 		}
 		j++;
 	}
@@ -56,13 +56,13 @@ void	check_horisontal_walls(t_game *game)
 			while (map[j] && map[j][i] && map[j][i] == ' ')
 				j++;
 			if (map[j] && map[j][i] && map[j][i] != '1')
-				close_exit(game, "error in horizontal wall\n");
+				close_exit(game, "Error\nIncomplete horizontal wall\n");
 			while (map[j] && map[j][i] && ft_strchr("10NESW", map[j][i]))
 				j++;
 			if (map[j] == NULL && map[j - 1][i] == ' ')
 				break ;
 			if (map[j - 1] && map[j - 1][i] != '1')
-				close_exit(game, "error in horizontal wall\n");
+				close_exit(game, "Error\nIncomplete horizontal wall\n");
 		}
 		i++;
 	}

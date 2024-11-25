@@ -6,11 +6,17 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:11:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 12:55:18 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:00:38 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	free_texinfo_tex(t_game *game)
+{
+	if (game->texinfo.tex)
+		free(game->texinfo.tex);
+}
 
 void	free_tab(void **tab)
 {
@@ -41,10 +47,6 @@ static void	free_texinfo(t_texinfo *texinfo)
 		free(texinfo->tex[EAST]);
 	if (texinfo->tex)
 		free(texinfo->tex);
-	// if (texinfo->floor)
-	// 	free(texinfo->floor);
-	// if (texinfo->ceiling)
-	// 	free(texinfo->ceiling);
 }
 
 static void	free_map(t_game *game)
@@ -53,8 +55,6 @@ static void	free_map(t_game *game)
 		close(game->mapinfo.fd);
 	if (game->mapinfo.file)
 		free_tab((void **)game->mapinfo.file);
-	if (game->map)
-		free_tab((void **)game->map);
 }
 
 int	free_game(t_game *game)

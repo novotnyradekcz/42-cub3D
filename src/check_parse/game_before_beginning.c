@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_before_beginning.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
+/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 15:08:46 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/22 22:33:52 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/25 07:34:56 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,6 @@ void	get_color(t_game *game)
 {
 	game->texinfo.hex_ceiling = hexa_color(ft_split(game->mapinfo.c_c, ','));
 	game->texinfo.hex_floor = hexa_color(ft_split(game->mapinfo.f_c, ','));
-	// printf ("moje u long c: %u\n", game->mapinfo.hexa_c);
-	// printf("moje u long f: %u\n", game->mapinfo.hexa_f);
-	// printf ("moje hexa c: %X\n", game->mapinfo.hexa_c);
-	// printf("moje hexa f: %X\n", game->mapinfo.hexa_f);
 }
 
 void	get_player_dir(t_game *game, int j, int i)

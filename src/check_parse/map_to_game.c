@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:11:48 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/16 12:03:20 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:02:54 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,16 @@ char	*map_field_game_helper(t_game *game, char *line)
 	return (map_line);
 }
 
+void	error_emptyline_free(char **map, char *line, int fd, t_game *game)
+{
+	if (line)
+		free(line);
+	if (map)
+		free_tab((void **)map);
+	close(fd);
+	close_exit(game, "Error\nEmpty line in map\n");
+}
+
 void	map_field_to_game(t_game *game, int fd, char **map)
 {
 	char	*line;
@@ -68,7 +78,7 @@ void	map_field_to_game(t_game *game, int fd, char **map)
 		check_map_char_2(line, game);
 		if (is_empty_line(line) && game->mapinfo.map_started \
 			&& i < game->mapinfo.height)
-			close_exit(game, "empty line in map\n");
+			error_emptyline_free(map, line, fd, game);
 		if (empty_line(line))
 			continue ;
 		map_line = map_field_game_helper(game, line);

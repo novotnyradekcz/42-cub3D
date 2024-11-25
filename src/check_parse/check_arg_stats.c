@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:15:35 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/16 12:03:05 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:01:15 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	check_mapinfo(t_game *game)
 		&& game->check.ea == 1 && game->check.we == 1 \
 		&& game->check.c == 1 && game->check.f == 1))
 	{
-		write (2, " to much or no map file info\n", 29);
+		write (2, "Error\nTo many or missing textures info\n", 40);
 		return (1);
 	}
 	return (0);
