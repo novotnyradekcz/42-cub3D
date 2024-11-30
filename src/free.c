@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:11:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/25 11:00:38 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:16:33 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ void	free_tab(void **tab)
 	size_t	i;
 
 	i = 0;
-	while (tab[i])
+	if (!tab)
+		return ;
+	while (tab && tab[i])
 	{
 		free(tab[i]);
 		i++;

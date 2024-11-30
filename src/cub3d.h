@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/25 11:22:21 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:16:17 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,6 +286,7 @@ void	get_stats_paths(char *line, t_game *game);
 
 //map_info_utils.c
 void	map_width(char *line, t_game *game);
+void	read_fd_to_end(int fd, char *line);
 
 //map_to_game.c
 int		map_to_game(t_game *game, char *arg);

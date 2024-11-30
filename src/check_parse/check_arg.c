@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 09:13:30 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/25 09:04:30 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:16:46 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	check_map_file(int fd, t_game *game)
 		{
 			if (check_map_char(line, game))
 				break ;
+			printf("Error:\nInvalid Texture\n");
+			read_fd_to_end(fd, line);
 			return (1);
 		}
 		free(line);
@@ -107,8 +109,8 @@ int	check_arg(char *argv, t_game *game)
 	}
 	if (check_map_file(fd, game))
 	{
-		close(fd);
 		free_texinfo_tex(game);
+		close(fd);
 		return (1);
 	}
 	close(fd);

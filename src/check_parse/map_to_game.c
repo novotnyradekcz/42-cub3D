@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:11:48 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/25 11:02:54 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:15:37 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,7 @@ char	*map_field_game_helper(t_game *game, char *line)
 
 void	error_emptyline_free(char **map, char *line, int fd, t_game *game)
 {
-	if (line)
-		free(line);
+	read_fd_to_end(fd, line);
 	if (map)
 		free_tab((void **)map);
 	close(fd);
@@ -72,6 +71,7 @@ void	map_field_to_game(t_game *game, int fd, char **map)
 	game->mapinfo.map_started = 0;
 	while (1)
 	{
+		map[i] = NULL;
 		line = get_next_line(fd);
 		if (!line)
 			break ;
@@ -95,11 +95,11 @@ int	map_to_game(t_game *game, char *arg)
 	char	**map;
 	int		fd;
 
-	map = game->map;
 	fd = open(arg, O_RDONLY);
 	if (fd < 0)
 	{
 		printf("Error\nCould not open map\n");
+		free_texinfo_tex(game);
 		return (1);
 	}
 	if (get_stats(game, fd))
