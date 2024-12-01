@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/12/01 10:46:54 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/12/01 12:05:01 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,18 @@ void	init_player_direction(t_game *game);
 // init/textures.c
 void	init_textures(t_game *game);
 void	init_texinfo(t_texinfo *texinfo);
+
+// minimap/draw_player.c
+void	draw_player_E(t_minimap *minimap, int x, int y);
+void	draw_player_N(t_minimap *minimap, int x, int y);
+void	draw_player_W(t_minimap *minimap, int x, int y);
+void	draw_player_S(t_minimap *minimap, int x, int y);
+
+// minimap/draw_player_2.c
+void	draw_player_NE(t_minimap *minimap, int x, int y);
+void	draw_player_NW(t_minimap *minimap, int x, int y);
+void	draw_player_SW(t_minimap *minimap, int x, int y);
+void	draw_player_SE(t_minimap *minimap, int x, int y);
 
 // minimap/render_image.c
 void	render_minimap_image(t_game *game, t_minimap *minimap);
