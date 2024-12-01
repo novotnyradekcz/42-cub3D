@@ -6,11 +6,262 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:32:23 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 10:27:11 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/12/01 11:43:25 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+static void	draw_player_N(t_minimap *minimap, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < minimap->tile_size)
+	{
+		j = 0;
+		while (j < (minimap->tile_size - i) / 2)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		while (j < (minimap->tile_size + i) / 2)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	draw_player_S(t_minimap *minimap, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < minimap->tile_size)
+	{
+		j = 0;
+		while (j < i / 2)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		while (j < minimap->tile_size - i / 2)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	draw_player_E(t_minimap *minimap, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < minimap->tile_size / 2)
+	{
+		j = 0;
+		while (j < 2 * i)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		i++;
+	}
+	while (i < minimap->tile_size)
+	{
+		j = 0;
+		while (j < 2 * minimap->tile_size - 2 * i)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		i++;
+	}
+}
+
+
+static void	draw_player_W(t_minimap *minimap, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < minimap->tile_size / 2)
+	{
+		j = 0;
+		while (j < minimap->tile_size - 2 * i)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		i++;
+	}
+	while (i < minimap->tile_size)
+	{
+		j = 0;
+		while (j < 2 * i - minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	draw_player_NE(t_minimap *minimap, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < minimap->tile_size)
+	{
+		j = 0;
+		while (j < i)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		i++;
+	}
+}
+
+
+static void	draw_player_NW(t_minimap *minimap, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < minimap->tile_size)
+	{
+		j = 0;
+		while (j < minimap->tile_size - i)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	draw_player_SW(t_minimap *minimap, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < minimap->tile_size)
+	{
+		j = 0;
+		while (j < i)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	draw_player_SE(t_minimap *minimap, int x, int y)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < minimap->tile_size)
+	{
+		j = 0;
+		while (j < minimap->tile_size - i)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_FLOOR);
+			j++;
+		}
+		while (j < minimap->tile_size)
+		{
+			set_image_pixel(minimap->img, x + j, i + y, MMAP_COLOR_PLAYER);
+			j++;
+		}
+		i++;
+	}
+}
+
+static void	set_minimap_player_tile(t_player *player, t_minimap *minimap, int x, int y)
+{
+	// TODO: use player direction to draw an oriented player
+	if (player->dir_x > 0 && player->dir_x >= 2 * fabs(player->dir_y))
+		draw_player_E(minimap, x, y);
+	else if (player->dir_y < 0 && 2 * fabs(player->dir_x) <= fabs(player->dir_y))
+		draw_player_N(minimap, x, y);
+	else if (player->dir_x < 0 && fabs(player->dir_x) >= 2 * fabs(player->dir_y))
+		draw_player_W(minimap, x, y);
+	else if (player->dir_y > 0 && fabs(2 * player->dir_x) <= player->dir_y)
+		draw_player_S(minimap, x, y);
+	else if (player->dir_x > 0 && player->dir_y > 0 &&
+		player->dir_x < 2 * player->dir_y && 2 * player->dir_x > player->dir_y)
+		draw_player_SE(minimap, x, y);
+	else if (player->dir_x > 0 && player->dir_y < 0 &&
+		player->dir_x < 2 * fabs(player->dir_y) && 2 * player->dir_x > fabs(player->dir_y))
+		draw_player_NE(minimap, x, y);
+	else if (player->dir_x < 0 && player->dir_y < 0 &&
+		player->dir_x > 2 * player->dir_y && 2 * player->dir_x < player->dir_y)
+		draw_player_NW(minimap, x, y);
+	else if (player->dir_x < 0 && player->dir_y > 0 &&
+		fabs(player->dir_x) < 2 * player->dir_y && 2 * fabs(player->dir_x) > player->dir_y)
+		draw_player_SW(minimap, x, y);
+}
 
 static void	set_minimap_tile_pixels(t_minimap *minimap, int x, int y, int color)
 {
@@ -30,11 +281,11 @@ static void	set_minimap_tile_pixels(t_minimap *minimap, int x, int y, int color)
 	}
 }
 
-static void	draw_minimap_tile(t_minimap *minimap, int x, int y)
+static void	draw_minimap_tile(t_game *game, t_minimap *minimap, int x, int y)
 {
 	if (minimap->map[y][x] == 'P')
-		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
-			y * minimap->tile_size, MMAP_COLOR_PLAYER);
+		set_minimap_player_tile(&game->player, minimap, x * minimap->tile_size,
+			y * minimap->tile_size);
 	else if (minimap->map[y][x] == '1')
 		set_minimap_tile_pixels(minimap, x * minimap->tile_size,
 			y * minimap->tile_size, MMAP_COLOR_WALL);
@@ -67,7 +318,7 @@ static void	set_minimap_border_image_pixels(t_minimap *minimap, int color)
 	}
 }
 
-static void	draw_minimap(t_minimap *minimap)
+static void	draw_minimap(t_game *game, t_minimap *minimap)
 {
 	int	x;
 	int	y;
@@ -81,7 +332,7 @@ static void	draw_minimap(t_minimap *minimap)
 			if (!minimap->map[y] || !minimap->map[y][x]
 				|| minimap->map[y][x] == '\0')
 				break ;
-			draw_minimap_tile(minimap, x, y);
+			draw_minimap_tile(game, minimap, x, y);
 			x++;
 		}
 		y++;
@@ -95,7 +346,7 @@ void	render_minimap_image(t_game *game, t_minimap *minimap)
 
 	img_size = MMAP_PIXEL_SIZE + minimap->tile_size;
 	init_img(game, &game->minimap, img_size, img_size);
-	draw_minimap(minimap);
+	draw_minimap(game, minimap);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img,
 		minimap->tile_size, game->win_height
 		- (MMAP_PIXEL_SIZE + (minimap->tile_size * 2)));

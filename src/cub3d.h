@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/23 12:04:52 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/12/01 10:46:54 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <X11/keysym.h>
 # include <X11/X.h>
 
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 960
+# define WIN_WIDTH 1600
+# define WIN_HEIGHT 900
 
 # define TEX_SIZE 64
 
@@ -36,7 +36,7 @@
 # define MOVE_SPEED 0.025
 # define ROT_SPEED 0.025
 
-# define MMAP_PIXEL_SIZE 128
+# define MMAP_PIXEL_SIZE 256
 # define MMAP_VIEW_DIST 4
 # define MMAP_COLOR_PLAYER 0x00FF00
 # define MMAP_COLOR_WALL 0x808080

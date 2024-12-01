@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/23 11:41:57 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/28 20:50:15 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,7 @@ int	main(int argc, char **argv)
 		init_textures(&game);
 		init_player_direction(&game);
 		print_controls();
-		render_images(&game);
+		render_images(&game);	// render first frame (otherwise starts with black screen before pressign something)
 		listen_for_input(&game);
 		mlx_loop_hook(game.mlx, render, &game);
 		mlx_loop(game.mlx);

@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:35:56 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 10:47:59 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/11/28 20:50:30 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,27 @@ static void	render_frame(t_game *game)
 		y++;
 	}
 	mlx_put_image_to_window(game->mlx, game->win, image.img, 0, 0);
+	render_minimap(game);	// render minimap on top of the frame to get rid of flickering
 	mlx_destroy_image(game->mlx, image.img);
 }
 
-static void	render_raycast(t_game *game)
+// static void	render_raycast(t_game *game)
+// {
+// 	init_texture_pixels(game);
+// 	init_ray(&game->ray);
+// 	raycasting(&game->player, game);
+// 	render_frame(game);
+// }
+
+void	render_images(t_game *game)
 {
+	// render_raycast(game);
 	init_texture_pixels(game);
 	init_ray(&game->ray);
 	raycasting(&game->player, game);
 	render_frame(game);
-}
 
-void	render_images(t_game *game)
-{
-	render_raycast(game);
-	render_minimap(game);
+	// render_minimap(game);
 }
 
 int	render(t_game *game)
