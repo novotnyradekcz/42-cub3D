@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 12:56:32 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/09 10:54:08 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:24:26 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,3 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 	}
 	return (src_len);
 }
-/*
-int    main (void)
- {
-    char src[] = "Hello";
-    char dest[20] = "Ahoj";
-    size_t i;
-    //size_t j;
-    
-    i = ft_strlcpy(dest, src, 5);
-    printf("delka celkoveho retezce moje: %ld\n", i);
-    //j = strlcat(dest, src, 10);
-    //printf("delka celkoveho retezce moje: %d\n", j);
-    return (0);
-     }
-     */

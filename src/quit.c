@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:10:32 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 12:54:23 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/25 11:00:13 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ int	quit_cub3d(t_game *game)
 	clean_exit(game, 0);
 	return (0);
 }
-
 
 void	free_a(t_game *game)
 {
@@ -82,6 +81,6 @@ void	free_all(t_game *game)
 void	close_exit(t_game *game, char *message)
 {
 	write(2, message, ft_strlen(message));
-	free_all(game);
+	free_game(game);
 	exit(1);
 }

@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/12/01 12:05:01 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/12/01 13:20:07 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define WIN_WIDTH 1600
 # define WIN_HEIGHT 900
 
-# define TEX_SIZE 64
+# define TEX_SIZE 1024
 
 # define COLLISION_DIST 0.04
 
@@ -71,14 +71,7 @@ typedef struct s_img
 
 typedef struct s_texinfo
 {
-	// char			*north; // merge this
-	// char			*south; // into
-	// char			*west; // one
-	// char			*east; // **char
-	char			**tex; // array
-	// int				*floor;
-	// int				*ceiling;
-	
+	char			**tex;
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
 	int				size;
@@ -183,10 +176,8 @@ typedef struct s_game
 	t_check		check;
 }	t_game;
 
-
 // gnl/get_next_line.c
 char	*get_next_line(int fd);
-
 
 // init/game.c
 void	init_game(t_game *game);
@@ -240,9 +231,10 @@ int		check_move(t_game *game, double new_x, double new_y);
 
 // error.c
 int		err_msg(char *detail, char *str, int code);
-int		err_msg_val(int detail, char *str, int code);
+// int		err_msg_val(int detail, char *str, int code);
 
 // free.c
+void	free_texinfo_tex(t_game *game);
 void	free_tab(void **tab);
 int		free_game(t_game *game);
 
@@ -270,39 +262,7 @@ int		rotate_player(t_game *game, double rotdir);
 void	update_texture_pixels(t_game *game, t_texinfo *tex, t_ray *ray, int x);
 void	init_texture_pixels(t_game *game);
 
-
-// // TODO: just for testing, remove later
-// /* parsing/check_args.c */
-// int		check_file(char *arg, int cub);
-
-// /* parsing/parse_data.c */
-// void	parse_data(char *path, t_game *data);
-
-// /* parsing/get_file_data.c */
-// int		get_file_data(t_game *data, char **map);
-
-// /* parsing/fill_color_textures.c */
-// int		fill_color_textures(t_game *data, t_texinfo *textures,
-// 			char *line, int j);
-
-// /* parsing/create_game_map.c */
-// int		create_map(t_game *data, char **map, int i);
-
-// /* parsing/check_textures.c */
-// int		check_textures_validity(t_game *data, t_texinfo *textures);
-
-// /* parsing/check_map.c */
-// int		check_map_validity(t_game *data, char **map_tab);
-
-// /* parsing/check_map_borders.c */
-// int		check_map_sides(t_mapinfo *map, char **map_tab);
-
-// /* parsing/parsing_utils.c */
-// int		is_a_white_space(char c);
-// size_t	find_biggest_len(t_mapinfo *map, int i);
-
 //check_arg_mapinfo.c
-
 void	count_map_char(t_game *game, char letter);
 int		mapinfo_checker(char *line, t_game *game);
 int		check_map(t_game *game);
@@ -316,6 +276,7 @@ int		check_stats(char *line, t_game *game);
 int		check_mapinfo(t_game *game);
 
 //check_arg.c
+void	init_check_game(t_game *game);
 int		check_extension(char *argv);
 int		check_map_file_helper(int fd, char *line, t_game *game);
 int		check_map_file(int fd, t_game *game);
@@ -323,7 +284,6 @@ int		check_arg(char *argv, t_game *game);
 
 //check_walls.c
 void	check_walls(t_game *game);
-
 
 //ending_game.c
 void	free_all(t_game *game);
@@ -338,6 +298,7 @@ void	get_stats_paths(char *line, t_game *game);
 
 //map_info_utils.c
 void	map_width(char *line, t_game *game);
+void	read_fd_to_end(int fd, char *line);
 
 //map_to_game.c
 int		map_to_game(t_game *game, char *arg);

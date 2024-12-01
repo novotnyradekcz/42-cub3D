@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:13:08 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/16 12:03:18 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:17:01 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,16 @@ void	map_width(char *line, t_game *game)
 	}
 	if (game->mapinfo.width < i)
 		game->mapinfo.width = i;
+}
+
+void	read_fd_to_end(int fd, char *line)
+{
+	while (line)
+	{
+		if (line)
+			free(line);
+		line = get_next_line(fd);
+	}
+	if (line)
+		free(line);
 }

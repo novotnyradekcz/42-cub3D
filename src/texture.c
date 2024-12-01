@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:37:21 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/28 20:07:21 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/12/01 13:20:58 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,6 @@ void	update_texture_pixels(t_game *game, t_texinfo *tex, t_ray *ray, int x)
 		tex->y = (int)tex->pos & (tex->size - 1);
 		tex->pos += tex->step;
 		color = game->textures[tex->index][tex->size * tex->y + tex->x];
-		// if (tex->index == NORTH || tex->index == EAST)
-		// 	color = (color >> 1) & 8355711;
 		if (color > 0)
 			game->texture_pixels[y][x] = color;
 		y++;
