@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:34:36 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/23 11:42:39 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:24:04 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ static void	init_raycasting_info(int x, t_ray *ray, t_player *player)
 
 /*
 - we are doing the initial set up
-- dwe will jump one square in each loop eiter in a x or y direction
-- ray->sidedist_x or y = distance from the ray start position to the
-	next x or y position
-- if x or y < 0 go the next x or y to the left
-- if x or y > 0 go the next x or y to the right
+- we will jump one square in each loop either in a x or y direction
+- ray->sidedist_x/y = distance from the ray start position to the
+	next x/y position
+- if x/y < 0 go the next x/y to the left
+- if x/y > 0 go the next x/y to the right
 */
 
 static void	set_dda(t_ray *ray, t_player *player)
