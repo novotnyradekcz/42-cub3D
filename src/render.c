@@ -6,7 +6,7 @@
 /*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:35:56 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/16 10:47:59 by rnovotny         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:05:46 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	render_frame(t_game *game)
 	mlx_destroy_image(game->mlx, image.img);
 }
 
-static void	render_raycast(t_game *game)
+void	render_raycast(t_game *game)
 {
 	init_texture_pixels(game);
 	init_ray(&game->ray);
@@ -53,17 +53,11 @@ static void	render_raycast(t_game *game)
 	render_frame(game);
 }
 
-void	render_images(t_game *game)
-{
-	render_raycast(game);
-	render_minimap(game);
-}
-
 int	render(t_game *game)
 {
 	game->player.has_moved += move_player(game);
 	if (game->player.has_moved == 0)
 		return (0);
-	render_images(game);
+	render_raycast(game);
 	return (0);
 }

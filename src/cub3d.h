@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/30 16:16:17 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:05:51 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@
 
 # define MOVE_SPEED 0.025
 # define ROT_SPEED 0.025
-
-# define MMAP_PIXEL_SIZE 128
-# define MMAP_VIEW_DIST 4
-# define MMAP_COLOR_PLAYER 0x00FF00
-# define MMAP_COLOR_WALL 0x808080
-# define MMAP_COLOR_FLOOR 0xE6E6E6
-# define MMAP_COLOR_SPACE 0x404040
 
 enum e_output
 {
@@ -82,24 +75,12 @@ typedef struct s_texinfo
 	int				y;
 }	t_texinfo;
 
-typedef struct s_minimap
-{
-	char	**map;
-	t_img	*img;
-	int		size;
-	int		offset_x;
-	int		offset_y;
-	int		view_dist;
-	int		tile_size;
-}	t_minimap;
-
 typedef struct s_mapinfo
 {
 	int			fd;
 	char		*texture_path[4];
 	char		*f_c;
 	char		*c_c;
-	// int			line_count;
 	char		*path;
 	char		**file;
 	int			height;
@@ -172,7 +153,6 @@ typedef struct s_game
 	int			**texture_pixels;
 	int			**textures;
 	t_texinfo	texinfo;
-	t_img		minimap;
 	t_check		check;
 }	t_game;
 
@@ -196,15 +176,9 @@ void	init_player_direction(t_game *game);
 void	init_textures(t_game *game);
 void	init_texinfo(t_texinfo *texinfo);
 
-// minimap/render_image.c
-void	render_minimap_image(t_game *game, t_minimap *minimap);
-
-// minimap/render_map.c
-void	render_minimap(t_game *game);
-
 // rendering.c
 int		render(t_game *data);
-void	render_images(t_game *data);
+void	render_raycast(t_game *game);
 
 // raycasting.c
 int		raycasting(t_player *player, t_game *data);

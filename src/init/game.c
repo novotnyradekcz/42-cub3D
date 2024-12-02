@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:18:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/25 07:48:57 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:05:05 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,6 @@ void	init_game(t_game *game)
 	init_texinfo(&game->texinfo);
 	game->map = NULL;
 	init_mapinfo(&game->mapinfo);
-	init_img_clean(&game->minimap);
 	game->texture_pixels = NULL;
 	game->textures = NULL;
 }

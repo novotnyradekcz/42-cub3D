@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
+/*   By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/02 11:11:29 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/11/25 08:57:45 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/01 14:04:25 by rnovotny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 		init_textures(&game);
 		init_player_direction(&game);
 		print_controls();
-		render_images(&game);
+		render_raycast(&game);
 		listen_for_input(&game);
 		mlx_loop_hook(game.mlx, render, &game);
 		mlx_loop(game.mlx);

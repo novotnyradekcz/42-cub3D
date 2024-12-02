@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+         #
+#    By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 11:44:56 by rnovotny          #+#    #+#              #
-#    Updated: 2024/11/30 16:15:52 by lmaresov         ###   ########.fr        #
+#    Updated: 2024/12/01 14:01:38 by rnovotny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,6 @@ SRC =	src/cub3d.c \
 		src/init/mlx.c \
 		src/init/player.c \
 		src/init/textures.c \
-		src/minimap/render_image.c \
-		src/minimap/render_map.c \
 		src/gnl/get_next_line.c \
 		src/gnl/get_next_line_utils.c \
 		src/libft/ft_atoi.c \
