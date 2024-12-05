@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rnovotny <rnovotny@student.42prague.com    +#+  +:+       +#+         #
+#    By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/26 11:44:56 by rnovotny          #+#    #+#              #
-#    Updated: 2024/12/01 14:01:38 by rnovotny         ###   ########.fr        #
+#    Updated: 2024/12/05 10:15:30 by lmaresov         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ SRC =	src/cub3d.c \
 		src/check_parse/check_arg_mapinfo.c\
 		src/check_parse/check_arg_stats.c\
 		src/check_parse/check_arg.c\
+		src/check_parse/check_color.c\
 		src/check_parse/check_walls.c\
 		src/check_parse/game_before_beginning.c\
 		src/check_parse/get_stats.c\

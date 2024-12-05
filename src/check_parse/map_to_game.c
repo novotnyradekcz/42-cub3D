@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 17:11:48 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/30 16:15:37 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/05 10:36:48 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	get_stats(t_game *game, int fd)
 			return (1);
 		if (empty_line(line))
 			continue ;
-		get_stats_paths(line, game);
+		get_stats_paths(line, game, fd);
 		if (game->mapinfo.map_info == 6)
 			break ;
 		free(line);
@@ -99,10 +99,12 @@ int	map_to_game(t_game *game, char *arg)
 	if (fd < 0)
 	{
 		printf("Error\nCould not open map\n");
-		free_texinfo_tex(game);
+		free_texinfo(&game->texinfo);
 		return (1);
 	}
 	if (get_stats(game, fd))
+		return (1);
+	if (check_colors(game, fd))
 		return (1);
 	map = malloc(sizeof(char *) * (game->mapinfo.height + 1));
 	map_field_to_game(game, fd, map);

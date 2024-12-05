@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 09:13:30 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/30 16:16:46 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/05 11:03:19 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ int	check_map_file_helper(int fd, char *line, t_game *game)
 			continue ;
 		map_width(line, game);
 		if (mapinfo_checker(line, game))
+		{
+			read_fd_to_end(fd, line);
 			return (1);
+		}
 		game->mapinfo.height++;
 		free(line);
 	}
@@ -72,7 +75,10 @@ int	check_map_file(int fd, t_game *game)
 	{
 		line = get_next_line(fd);
 		if (!line)
+		{
+			printf("Error\nMap is missing\n");
 			return (1);
+		}
 		if (empty_line(line))
 			continue ;
 		if (check_stats(line, game))
@@ -96,20 +102,18 @@ int	check_arg(char *argv, t_game *game)
 
 	if (check_extension(argv))
 	{
-		printf("Error\nWrong extension\n");
-		free_texinfo_tex(game);
+		free_print_mess(game, "Error\nWrong extension\n");
 		return (1);
 	}
 	fd = open(argv, O_RDONLY);
 	if (fd < 0)
 	{
-		printf("Error\nCould not open map\n");
-		free_texinfo_tex(game);
+		free_print_mess(game, "Error\nCould not open map\n");
 		return (1);
 	}
 	if (check_map_file(fd, game))
 	{
-		free_texinfo_tex(game);
+		free_texinfo(&game->texinfo);
 		close(fd);
 		return (1);
 	}

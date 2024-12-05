@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/03 13:11:36 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/11/25 09:23:27 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/05 11:00:17 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	mapinfo_checker(char *line, t_game *game)
 	{
 		if (!ft_strchr("01NSEW ", line[i]))
 		{
-			write(2, "Error\nInvalid character in map\n", 32);
-			free(line);
+			write(2, "Error\nInvalid character in map ", 32);
+			write(2, "or map is not the last in file\n", 32);
 			return (1);
 		}
 		if (ft_strchr("NSEW", line[i]))
@@ -87,7 +87,7 @@ int	check_map(t_game *game)
 		|| (game->check.n == 0 && game->check.s == 0 \
 		&& game->check.e == 0 && game->check.w == 1)))
 	{
-		write (2, "Error\nTo many or no player position in map\n", 44);
+		write (2, "Error\nToo many or no player position in map\n", 45);
 		return (1);
 	}
 	return (0);
