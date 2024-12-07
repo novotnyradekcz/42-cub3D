@@ -6,11 +6,28 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 10:14:19 by lmaresov          #+#    #+#             */
-/*   Updated: 2024/12/05 11:09:33 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/07 11:30:16 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+int	check_color_count(char **sc)
+{
+	if (!(sc && sc[0] && sc[1] && sc[2]))
+	{
+		printf("Error\nMissing color\n");
+		free_tab((void **)sc);
+		return (1);
+	}
+	if ((sc && sc[3]))
+	{
+		printf("Error\nToo many color values\n");
+		free_tab((void **)sc);
+		return (1);
+	}
+	return (0);
+}
 
 int	split_colors(char *color)
 {
@@ -20,6 +37,10 @@ int	split_colors(char *color)
 
 	i = 0;
 	splited_color = ft_split(color, ',');
+	if (check_color_count(splited_color))
+	{
+		return (1);
+	}
 	while (i < 3)
 	{
 		col = ft_atoi(splited_color[i]);
