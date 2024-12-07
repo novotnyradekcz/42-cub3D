@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/12/07 09:58:31 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/07 10:04:46 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ int		raycasting(t_player *player, t_game *game);
 // render.c
 int		render(t_game *game);
 void	render_images(t_game *game);
+void	render_raycast(t_game *game);
 
 // rotate.c
 int		rotate_player(t_game *game, double rotdir);
@@ -253,20 +254,6 @@ int		rotate_player(t_game *game, double rotdir);
 // texture.c
 void	update_texture_pixels(t_game *game, t_texinfo *tex, t_ray *ray, int x);
 void	init_texture_pixels(t_game *game);
-
-
-
-
-// rendering.c
-int		render(t_game *data);
-void	render_raycast(t_game *game);
-
-// raycasting.c
-int		raycasting(t_player *player, t_game *data);
-
-// texturing.c
-void	init_texture_pixels(t_game *data);
-void	update_texture_pixels(t_game *data, t_texinfo *tex, t_ray *ray, int x);
 void	set_image_pixel(t_img *image, int x, int y, int color);
 
 #endif
