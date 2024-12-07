@@ -6,7 +6,7 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/26 12:08:04 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/12/05 10:53:46 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:58:31 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,47 @@ typedef struct s_game
 	t_check		check;
 }	t_game;
 
+//check_parse/check_arg_mapinfo.c
+void	count_map_char(t_game *game, char letter);
+int		mapinfo_checker(char *line, t_game *game);
+int		check_map(t_game *game);
+int		is_empty_line(char *line);
+int		empty_line(char *line);
+
+//check_parse/check_arg_stats.c
+int		check_map_char(char *line, t_game *game);
+void	check_map_char_2(char *line, t_game *game);
+int		check_stats(char *line, t_game *game);
+int		check_mapinfo(t_game *game);
+
+//check_parse/check_arg.c
+void	init_check_game(t_game *game);
+int		check_extension(char *argv);
+int		check_map_file_helper(int fd, char *line, t_game *game);
+int		check_map_file(int fd, t_game *game);
+int		check_arg(char *argv, t_game *game);
+
+//check_parse/check_color.c
+int		check_colors(t_game *game, int fd);
+void	free_print_mess(t_game *game, char *message);
+
+//check_parse/check_walls.c
+void	check_walls(t_game *game);
+
+//check_parse/game_before_beginning.c
+void	game_before_beginning(t_game *game);
+
+//check_parse/get_stats.c
+void	get_stats_paths(char *line, t_game *game, int fd);
+void	free_tex(t_game *game);
+
+//check_parse/map_info_utils.c
+void	map_width(char *line, t_game *game);
+void	read_fd_to_end(int fd, char *line);
+
+//check_parse/map_to_game.c
+int		map_to_game(t_game *game, char *arg);
+
 // gnl/get_next_line.c
 char	*get_next_line(int fd);
 
@@ -176,27 +217,13 @@ void	init_player_direction(t_game *game);
 void	init_textures(t_game *game);
 void	init_texinfo(t_texinfo *texinfo);
 
-// rendering.c
-int		render(t_game *data);
-void	render_raycast(t_game *game);
-
-// raycasting.c
-int		raycasting(t_player *player, t_game *data);
-
-// texturing.c
-void	init_texture_pixels(t_game *data);
-void	update_texture_pixels(t_game *data, t_texinfo *tex, t_ray *ray, int x);
-void	set_image_pixel(t_img *image, int x, int y, int color);
-
 // check_move.c
 int		check_move(t_game *game, double new_x, double new_y);
 
 // error.c
 int		err_msg(char *detail, char *str, int code);
-// int		err_msg_val(int detail, char *str, int code);
 
 // free.c
-// void	free_texinfo_tex(t_game *game);
 void	free_texinfo(t_texinfo *texinfo);
 void	free_tab(void **tab);
 int		free_game(t_game *game);
@@ -210,13 +237,15 @@ int		move_player(t_game *game);
 // quit.c
 void	clean_exit(t_game *game, int code);
 int		quit_cub3d(t_game *game);
+void	free_all(t_game *game);
+void	close_exit(t_game *game, char *message);
+
+// raycast.c
+int		raycasting(t_player *player, t_game *game);
 
 // render.c
 int		render(t_game *game);
 void	render_images(t_game *game);
-
-// raycast.c
-int		raycasting(t_player *player, t_game *game);
 
 // rotate.c
 int		rotate_player(t_game *game, double rotdir);
@@ -225,49 +254,19 @@ int		rotate_player(t_game *game, double rotdir);
 void	update_texture_pixels(t_game *game, t_texinfo *tex, t_ray *ray, int x);
 void	init_texture_pixels(t_game *game);
 
-//check_arg_mapinfo.c
-void	count_map_char(t_game *game, char letter);
-int		mapinfo_checker(char *line, t_game *game);
-int		check_map(t_game *game);
-int		is_empty_line(char *line);
-int		empty_line(char *line);
 
-//check_arg_stats.c
-int		check_map_char(char *line, t_game *game);
-void	check_map_char_2(char *line, t_game *game);
-int		check_stats(char *line, t_game *game);
-int		check_mapinfo(t_game *game);
 
-//check_arg.c
-void	init_check_game(t_game *game);
-int		check_extension(char *argv);
-int		check_map_file_helper(int fd, char *line, t_game *game);
-int		check_map_file(int fd, t_game *game);
-int		check_arg(char *argv, t_game *game);
 
-//check_color.c
-int		check_colors(t_game *game, int fd);
-void	free_print_mess(t_game *game, char *message);
-//check_walls.c
-void	check_walls(t_game *game);
+// rendering.c
+int		render(t_game *data);
+void	render_raycast(t_game *game);
 
-//ending_game.c
-void	free_all(t_game *game);
-void	free_a(t_game *game);
-void	close_exit(t_game *game, char *message);
+// raycasting.c
+int		raycasting(t_player *player, t_game *data);
 
-//game_before_beginning.c
-void	game_before_beginning(t_game *game);
+// texturing.c
+void	init_texture_pixels(t_game *data);
+void	update_texture_pixels(t_game *data, t_texinfo *tex, t_ray *ray, int x);
+void	set_image_pixel(t_img *image, int x, int y, int color);
 
-//get_stats.c
-// void	get_stats_paths(char *line, t_game *game);
-void	get_stats_paths(char *line, t_game *game, int fd);
-void	free_tex(t_game *game);
-
-//map_info_utils.c
-void	map_width(char *line, t_game *game);
-void	read_fd_to_end(int fd, char *line);
-
-//map_to_game.c
-int		map_to_game(t_game *game, char *arg);
 #endif
