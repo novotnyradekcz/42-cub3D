@@ -6,17 +6,11 @@
 /*   By: lmaresov <lmaresov@student.42prague.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/09 08:11:43 by rnovotny          #+#    #+#             */
-/*   Updated: 2024/12/05 10:45:41 by lmaresov         ###   ########.fr       */
+/*   Updated: 2024/12/07 09:30:59 by lmaresov         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-// void	free_texinfo_tex(t_game *game)
-// {
-// 	if (game->texinfo.tex)
-// 		free(game->texinfo.tex);
-// }
 
 void	free_tab(void **tab)
 {
